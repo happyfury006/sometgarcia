@@ -35,6 +35,16 @@ jobs:
       - name: Compiler les jeux en WebAssembly
         run: bash scripts/jeux-web.sh
 
+      # Démo de la boutique PHP (github.com/happyfury006/projetwebzz2), sur la base
+      # MySQL d'OVH ; ignorée tant que le secret DEMO_DB_BASE n'est pas renseigné
+      - name: Publier la boutique PHP
+        env:
+          DEMO_DB_HOTE: ${{ secrets.DEMO_DB_HOTE }}
+          DEMO_DB_UTILISATEUR: ${{ secrets.DEMO_DB_UTILISATEUR }}
+          DEMO_DB_MOT_DE_PASSE: ${{ secrets.DEMO_DB_MOT_DE_PASSE }}
+          DEMO_DB_BASE: ${{ secrets.DEMO_DB_BASE }}
+        run: bash scripts/demo-php.sh
+
       - name: Vérifier les dossiers cibles
         # Garde-fou : le miroir supprime les fichiers distants absents de dist/<site>/.
         # Un mauvais dossier (racine de l'hébergement, dossier d'un autre site…) l'effacerait.
