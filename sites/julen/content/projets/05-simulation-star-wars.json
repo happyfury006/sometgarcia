@@ -1,13 +1,20 @@
 {
   "slug": "simulation-star-wars",
-  "type": "web",
+  "type": "logiciel",
   "titre": "Simulation de combat Star Wars en Java",
   "resume": "Jeu de combat au tour par tour entre deux escouades, conçu pour appliquer quatre design patterns sur un cas concret, avec une interface Swing et un mode joueur contre ordinateur.",
   "date": "2025-01",
   "vedette": true,
-  "stack": ["Java 17", "Swing", "JUnit 5", "Maven"],
+  "stack": [
+    "Java 17",
+    "Swing",
+    "JUnit 5",
+    "Maven"
+  ],
   "role": "Projet d'architecture logicielle à l'ISIMA, en binôme avec Jocelin Calas",
-  "liens": { "depot": "https://github.com/happyfury006/projet_archi_log" },
+  "liens": {
+    "depot": "https://github.com/happyfury006/projet_archi_log"
+  },
   "contexte": "Pour le cours d'architecture logicielle, il fallait mettre en œuvre des design patterns sur une simulation. Deux escouades de cinq soldats, côté lumineux contre côté obscur, s'affrontent sur une carte de 8 × 8 cases. On peut jouer un camp contre l'ordinateur ou regarder l'ordinateur jouer les deux. Les soldats de l'ordinateur avancent, attaquent, battent en retraite quand ils sont blessés puis reviennent au combat.",
   "contributions": [
     "Abstract Factory : chaque camp fournit sa famille de soldats, le monde demande « un soldat de corps à corps » sans savoir s'il obtient un Twi'lek ou un Zabrak",

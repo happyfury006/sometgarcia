@@ -1,6 +1,6 @@
 {
   "slug": "quantik",
-  "type": "web",
+  "type": "logiciel",
   "titre": "Quantik : jeu de plateau en C contre l'ordinateur",
   "resume": "Le jeu de société Quantik en C, avec une interface graphique SDL2 et une IA minimax alpha-bêta. Commencé en équipe en 1re année sans jamais être terminé, puis repris pour le rendre jouable.",
   "date": "2024-06",

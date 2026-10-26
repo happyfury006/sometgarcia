@@ -12,8 +12,15 @@ const projets = readdirSync(join(ROOT, "content/projets"))
   .map((f) => JSON.parse(readFileSync(join(ROOT, "content/projets", f), "utf8")))
   .sort((a, b) => b.date.localeCompare(a.date));
 
+// Catégories de projets : libellé, préfixe du code de mission (DAT-04...) et filtre de la page Missions
+const TYPES = {
+  data: { libelle: "Data", code: "DAT" },
+  web: { libelle: "Web", code: "WEB" },
+  logiciel: { libelle: "Logiciel", code: "LOG" },
+};
+
 for (const p of projets) {
-  if (!p.slug || !["data", "web"].includes(p.type)) {
+  if (!p.slug || !(p.type in TYPES)) {
     throw new Error(`Projet invalide (slug ou type manquant) : ${p.titre}`);
   }
 }
@@ -23,7 +30,8 @@ const esc = (s = "") =>
   String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 const MOIS = ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."];
 const dateFr = (ym) => { const [y, m] = ym.split("-"); return `${MOIS[+m - 1]} ${y}`; };
-const code = (p, i) => `${p.type === "data" ? "DAT" : "WEB"}-${String(projets.length - i).padStart(2, "0")}`;
+const code = (p, i) => `${TYPES[p.type].code}-${String(projets.length - i).padStart(2, "0")}`;
+const pastille = (p) => `<span class="pastille pastille-${p.type}">${TYPES[p.type].libelle}</span>`;
 const ext = (url, label) =>
   url ? `<a class="btn btn-ghost" href="${esc(url)}" target="_blank" rel="noopener">${label} <span aria-hidden="true">↗</span></a>` : "";
 
@@ -81,7 +89,7 @@ function carte(p, i) {
   return `<article class="carte carte-${p.type}">
   <a class="carte-lien" href="/projets/${esc(p.slug)}/">
     <div class="carte-tete mono">
-      <span class="pastille pastille-${p.type}">${p.type === "data" ? "Data" : "Web / Dev"}</span>
+      ${pastille(p)}
       <span>${code(p, i)}</span>
     </div>
     <h3>${esc(p.titre)}${p.exemple ? ' <span class="exemple">exemple</span>' : ""}</h3>
@@ -160,8 +168,7 @@ function listeProjets() {
   <p class="entete-sous">Projets data et développement, du plus récent au plus ancien.</p>
   <div class="filtres" role="group" aria-label="Filtrer par type">
     <button class="filtre" data-filtre="tout" aria-pressed="true">Tout <span class="mono">${projets.length}</span></button>
-    <button class="filtre" data-filtre="data" aria-pressed="false">Data <span class="mono">${projets.filter((p) => p.type === "data").length}</span></button>
-    <button class="filtre" data-filtre="web" aria-pressed="false">Web / Dev <span class="mono">${projets.filter((p) => p.type === "web").length}</span></button>
+    ${Object.entries(TYPES).map(([type, t]) => `<button class="filtre" data-filtre="${type}" aria-pressed="false">${t.libelle} <span class="mono">${projets.filter((p) => p.type === type).length}</span></button>`).join("\n    ")}
   </div>
 </section>
 <section class="bloc"><div class="grille" id="grille-projets">${projets.map(carte).join("")}</div></section>`;
@@ -188,6 +195,7 @@ function ficheData(p) {
   ${blocs.map(([titre, corps], i) => section(titre, corps, lettre(i))).join("\n  ")}`;
 }
 
+// Projets web et logiciel : contexte, contributions, difficulté
 function ficheWeb(p) {
   return `
   ${p.image ? `<figure class="visuel"><img src="${esc(p.image)}" alt="Capture d'écran de ${esc(p.titre)}" loading="lazy"></figure>` : ""}
@@ -203,7 +211,7 @@ function fiche(p, i) {
 <article class="fiche">
   <header class="bloc entete-page">
     <a class="lien-fleche retour" href="/projets/">← Toutes les missions</a>
-    <p class="mono bloc-etiquette"><span class="pastille pastille-${p.type}">${p.type === "data" ? "Data" : "Web / Dev"}</span> ${code(p, i)} · ${dateFr(p.date)}</p>
+    <p class="mono bloc-etiquette">${pastille(p)} ${code(p, i)} · ${dateFr(p.date)}</p>
     <h1>${esc(p.titre)}</h1>
     ${p.exemple ? '<p class="avertissement">Projet d\'exemple — à remplacer par un vrai projet.</p>' : ""}
     <p class="entete-sous">${esc(p.resume)}</p>

@@ -1,6 +1,6 @@
 {
   "slug": "catane-jeu-de-cartes",
-  "type": "web",
+  "type": "logiciel",
   "titre": "Catane, le jeu de cartes : IA Monte-Carlo en C",
   "resume": "Un jeu de cartes à deux inspiré de Catane, en C avec SDL2, contre une IA MCTS qui ne triche pas. Le second jeu de notre projet de 1re année, resté inachevé puis repris et terminé.",
   "date": "2024-06",

@@ -11,6 +11,8 @@
   --ambre-doux: rgba(255, 181, 71, 0.14);
   --cyan: #62e3ff;
   --cyan-doux: rgba(98, 227, 255, 0.12);
+  --violet: #b9a3ff;
+  --violet-doux: rgba(185, 163, 255, 0.12);
   --rayon: 4px;
   --titre: "Chakra Petch", "Segoe UI", sans-serif;
   --corps: "IBM Plex Sans", system-ui, sans-serif;
@@ -130,6 +132,8 @@ main { flex: 1; }
 .carte-web:hover { border-color: rgba(255, 181, 71, 0.5); box-shadow: 0 10px 40px rgba(255, 181, 71, 0.08); }
 .carte-data:hover::before, .carte-data:hover::after { border-color: var(--cyan); }
 .carte-web:hover::before, .carte-web:hover::after { border-color: var(--ambre); }
+.carte-logiciel:hover { border-color: rgba(185, 163, 255, 0.5); box-shadow: 0 10px 40px rgba(185, 163, 255, 0.08); }
+.carte-logiciel:hover::before, .carte-logiciel:hover::after { border-color: var(--violet); }
 .carte-lien { display: flex; flex-direction: column; height: 100%; padding: 1.5rem; color: inherit; }
 .carte-lien:hover { text-decoration: none; }
 .carte-tete { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
@@ -142,6 +146,7 @@ main { flex: 1; }
 .pastille { display: inline-block; padding: 0.15rem 0.55rem; border-radius: 2px; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; }
 .pastille-data { color: var(--cyan); background: var(--cyan-doux); border: 1px solid rgba(98, 227, 255, 0.35); }
 .pastille-web { color: var(--ambre); background: var(--ambre-doux); border: 1px solid rgba(255, 181, 71, 0.35); }
+.pastille-logiciel { color: var(--violet); background: var(--violet-doux); border: 1px solid rgba(185, 163, 255, 0.35); }
 .exemple { font-family: var(--mono); font-size: 0.65rem; vertical-align: middle; color: #ff8a8a; border: 1px dashed #ff8a8a; padding: 0.05rem 0.35rem; text-transform: uppercase; letter-spacing: 0.06em; }
 
 .etiquettes { list-style: none; padding: 0; margin: 0.5rem 0 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
