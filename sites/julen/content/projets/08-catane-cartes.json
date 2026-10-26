@@ -13,6 +13,7 @@
   ],
   "role": "Projet de 1re année à l'ISIMA, équipe de 3 : règles et structures du jeu, puis reprise de l'ensemble pour le terminer",
   "liens": {
+    "jouer": "/jeux/catane/",
     "depot": "https://github.com/happyfury006/projet-zz1/tree/main/jeu2"
   },
   "contexte": "Après le Quantik, nous avons commencé un second jeu : un duel de cartes inspiré de Catane, avec des ressources, un marché, une pioche et des constructions qui rapportent des points. À la fin du projet, il ne compilait pas : deux interfaces SDL concurrentes, une IA réduite à un squelette, et des règles incomplètes.",

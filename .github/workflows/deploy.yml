@@ -25,6 +25,16 @@ jobs:
       - name: Générer les sites
         run: node build.mjs
 
+      # Les deux jeux du projet ZZ1 (C + SDL2), compilés en WebAssembly depuis
+      # github.com/happyfury006/projet-zz1 et publiés dans julen.sometgarcia.fr/jeux/
+      - uses: emscripten-core/setup-emsdk@v15
+        with:
+          version: 3.1.74
+          actions-cache-folder: emsdk-cache
+
+      - name: Compiler les jeux en WebAssembly
+        run: bash scripts/jeux-web.sh
+
       - name: Vérifier les dossiers cibles
         # Garde-fou : le miroir supprime les fichiers distants absents de dist/<site>/.
         # Un mauvais dossier (racine de l'hébergement, dossier d'un autre site…) l'effacerait.

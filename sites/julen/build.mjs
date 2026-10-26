@@ -220,6 +220,7 @@ function fiche(p, i) {
       <div><dt class="mono">Stack</dt><dd><ul class="etiquettes">${p.stack.map((s) => `<li>${esc(s)}</li>`).join("")}</ul></dd></div>
     </dl>
     <div class="actions">
+      ${p.liens?.jouer ? `<a class="btn" href="${esc(p.liens.jouer)}">Jouer en ligne <span aria-hidden="true">▶</span></a>` : ""}
       ${ext(p.liens?.demo, "Voir en ligne")}
       ${ext(p.liens?.depot, "Code source")}
       ${ext(p.liens?.notebook, "Notebook")}

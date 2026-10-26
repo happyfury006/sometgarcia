@@ -29,7 +29,7 @@ Chaque site a la même structure : `build.mjs` (le générateur), `content/` (le
 
 Tout ce qui contient `[À REMPLACER]` est à réécrire : le build le signale.
 
-Champs communs d'un projet : `slug` (l'URL), `type` (`"data"`, `"web"` ou `"logiciel"`), `titre`, `resume`, `date` (`"AAAA-MM"`), `vedette` (affiché sur l'accueil), `stack`, `role`, `liens` (`depot`, `demo`, `notebook`, tous facultatifs), `image`.
+Champs communs d'un projet : `slug` (l'URL), `type` (`"data"`, `"web"` ou `"logiciel"`), `titre`, `resume`, `date` (`"AAAA-MM"`), `vedette` (affiché sur l'accueil), `stack`, `role`, `liens` (`jouer`, `depot`, `demo`, `notebook`, tous facultatifs ; `jouer` mène à une page du site, par exemple `/jeux/quantik/`), `image`.
 
 - **`data`** : `question`, `donnees`, `methode`, `resultats` (liste de `{ "valeur", "libelle" }`, le premier s'affiche sur la carte), `conclusion`.
 - **`web`** et **`logiciel`** : `contexte`, `contributions` (liste), `difficulte`.

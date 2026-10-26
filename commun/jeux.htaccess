@@ -1,0 +1,12 @@
+# Jeux en WebAssembly (compilés depuis projet-zz1) : même politique que le reste
+# du site, plus 'wasm-unsafe-eval', sans lequel le navigateur refuse de lancer le jeu
+<IfModule mod_mime.c>
+  AddType application/wasm .wasm
+</IfModule>
+<IfModule mod_headers.c>
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+</IfModule>
+<IfModule mod_expires.c>
+  ExpiresByType application/wasm "access plus 7 days"
+  ExpiresByType application/octet-stream "access plus 7 days"
+</IfModule>

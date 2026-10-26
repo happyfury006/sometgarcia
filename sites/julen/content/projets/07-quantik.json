@@ -14,6 +14,7 @@
   ],
   "role": "Projet de 1re année à l'ISIMA, équipe de 3 : règles du jeu, puis reprise de l'ensemble pour le terminer",
   "liens": {
+    "jouer": "/jeux/quantik/",
     "depot": "https://github.com/happyfury006/projet-zz1/tree/main/jeu1"
   },
   "contexte": "Le Quantik se joue sur un plateau 4 × 4 avec quatre formes : on gagne en posant la quatrième forme différente d'une ligne, d'une colonne ou d'un carré, et on n'a pas le droit de poser une forme là où l'adversaire l'a déjà posée. En équipe de trois, je m'occupais des règles, Valentin de l'interface SDL et Henri de l'IA. À la fin du projet, aucune des trois parties ne fonctionnait avec les autres : le jeu n'était pas jouable.",
