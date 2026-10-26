@@ -37,15 +37,36 @@ jobs:
       - name: Installer lftp
         run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
 
+      # Le mot de passe passe par LFTP_PASSWORD (--env-password) : aucun caractère spécial ne peut casser la commande
+      - name: Tester la connexion SFTP
+        env:
+          HOTE: ${{ secrets.OVH_HOTE }}
+          UTILISATEUR: ${{ secrets.OVH_UTILISATEUR }}
+          LFTP_PASSWORD: ${{ secrets.OVH_MOT_DE_PASSE }}
+        run: |
+          HOTE="${HOTE// /}"; HOTE="${HOTE#sftp://}"; HOTE="${HOTE#ftp://}"; HOTE="${HOTE#*@}"; HOTE="${HOTE%%[:/]*}"
+          echo "Connexion à $HOTE avec l'utilisateur '$UTILISATEUR'"
+          if ! lftp -c "
+            set sftp:auto-confirm yes;
+            set net:max-retries 1;
+            set net:timeout 20;
+            open --env-password -u \"$UTILISATEUR\" sftp://$HOTE;
+            cls -1 --sort=name
+          "; then
+            echo "::error::Connexion SFTP impossible. Vérifie OVH_HOTE (ex. ftp.cluster127.hosting.ovh.net, sans ftp:// ni port), OVH_UTILISATEUR et OVH_MOT_DE_PASSE (onglet FTP-SSH d'OVH)."
+            exit 1
+          fi
+
       - name: Envoyer sur OVH (SFTP)
         env:
           HOTE: ${{ secrets.OVH_HOTE }}
           UTILISATEUR: ${{ secrets.OVH_UTILISATEUR }}
-          MOT_DE_PASSE: ${{ secrets.OVH_MOT_DE_PASSE }}
+          LFTP_PASSWORD: ${{ secrets.OVH_MOT_DE_PASSE }}
           RACINE: ${{ secrets.OVH_DOSSIER_RACINE }}
           JULEN: ${{ secrets.OVH_DOSSIER_JULEN }}
           MAITANE: ${{ secrets.OVH_DOSSIER_MAITANE }}
         run: |
+          HOTE="${HOTE// /}"; HOTE="${HOTE#sftp://}"; HOTE="${HOTE#ftp://}"; HOTE="${HOTE#*@}"; HOTE="${HOTE%%[:/]*}"
           miroirs=""
           ajouter() { [ -n "$2" ] && miroirs="$miroirs mirror --reverse --delete --verbose --parallel=4 dist/$1/ \"$2\";"; }
           ajouter racine "$RACINE"
@@ -53,8 +74,9 @@ jobs:
           ajouter maitane "$MAITANE"
           lftp -c "
             set sftp:auto-confirm yes;
+            set cmd:fail-exit yes;
             set net:max-retries 2;
             set net:timeout 30;
-            open -u \"$UTILISATEUR\",\"$MOT_DE_PASSE\" sftp://$HOTE;
+            open --env-password -u \"$UTILISATEUR\" sftp://$HOTE;
             $miroirs
           "
