@@ -1,6 +1,7 @@
 # Site associatif : la politique du portfolio, plus sa police décorative locale (font-src 'self')
+# et son script (orbites, introduction au défilement)
 <IfModule mod_headers.c>
-  Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+  Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
 </IfModule>
 <IfModule mod_expires.c>
   ExpiresByType font/ttf "access plus 30 days"
