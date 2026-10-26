@@ -1,0 +1,21 @@
+{
+  "slug": "refonte-site-bde",
+  "type": "web",
+  "titre": "Refonte du site du BDE de l'ISIMA",
+  "resume": "Application web pour gérer les comptes, les organisations, les événements et les transactions du BDE. Projet en cours, première version bientôt en ligne.",
+  "date": "2026-10",
+  "vedette": true,
+  "stack": ["Django", "Django REST Framework", "React", "TypeScript", "PostgreSQL", "Docker", "GitLab CI"],
+  "role": "Développeur fullstack, équipe de 3 (en cours)",
+  "liens": {},
+  "contexte": "Le BDE de l'ISIMA gère des adhérents, des pôles et des clubs, des événements et des transactions. La refonte remplace l'ancien site par une API Django et une interface React, adossées à PostgreSQL, avec un système de permissions qui permet à chaque organisation de se gérer elle-même.",
+  "contributions": [
+    "Module Organisations : tableau de bord de gestion, membres, postes, mandats et hiérarchie des pôles et des clubs",
+    "Refonte des permissions : les droits dépendent désormais du poste occupé dans l'organisation, et non plus d'un rôle global",
+    "Création de compte : vérification de l'adresse email par jeton hashé, limitation du nombre de requêtes, validation des comptes et suppression automatique des comptes non validés après 90 jours",
+    "Sessions : cookies persistants et déconnexion automatique quand le jeton de rafraîchissement expire",
+    "Déploiement continu (GitLab CI) : la base de test n'est plus effacée à chaque déploiement"
+  ],
+  "difficulte": "[À REMPLACER] Le problème le plus dur que tu as rencontré et comment tu l'as résolu. Par exemple : passer de rôles globaux à des permissions liées au poste sans casser les comptes existants.",
+  "image": ""
+}

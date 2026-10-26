@@ -1,0 +1,55 @@
+name: Déploiement OVH
+
+# Se lance à chaque push sur main, ou à la main depuis l'onglet Actions de GitHub.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploiement-ovh
+  cancel-in-progress: false
+
+jobs:
+  deployer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Générer le site
+        run: node build.mjs
+
+      - name: Vérifier le dossier cible
+        # Garde-fou : le miroir supprime les fichiers distants absents de dist/.
+        # Un mauvais dossier (racine, www, wordpress…) effacerait d'autres sites.
+        env:
+          DOSSIER: ${{ secrets.OVH_DOSSIER }}
+        run: |
+          case "$DOSSIER" in
+            ""|"/"|"."|"./"|"www"|"www/"|"/www"|"/www/")
+              echo "::error::OVH_DOSSIER vaut '$DOSSIER' : refusé. Utilise un dossier dédié, ex. 'julen'."
+              exit 1 ;;
+          esac
+          echo "Dossier cible : $DOSSIER"
+
+      - name: Installer lftp
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+
+      - name: Envoyer sur OVH (SFTP)
+        env:
+          HOTE: ${{ secrets.OVH_HOTE }}
+          UTILISATEUR: ${{ secrets.OVH_UTILISATEUR }}
+          MOT_DE_PASSE: ${{ secrets.OVH_MOT_DE_PASSE }}
+          DOSSIER: ${{ secrets.OVH_DOSSIER }}
+        run: |
+          lftp -c "
+            set sftp:auto-confirm yes;
+            set net:max-retries 2;
+            set net:timeout 30;
+            open -u \"$UTILISATEUR\",\"$MOT_DE_PASSE\" sftp://$HOTE;
+            mirror --reverse --delete --verbose --parallel=4 dist/ \"$DOSSIER\";
+          "

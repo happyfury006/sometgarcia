@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://julen.sometgarcia.fr/sitemap.xml

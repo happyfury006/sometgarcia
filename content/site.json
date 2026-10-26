@@ -1,0 +1,27 @@
+{
+  "url": "https://julen.sometgarcia.fr",
+  "nom": "Julen Somet García",
+  "indicatif": "JSG-27",
+  "titre": "Élève ingénieur en informatique — Systèmes d'information et aide à la décision",
+  "accroche": "Je conçois des bases de données, des traitements de données et des services web, de la donnée brute jusqu'à l'interface qui l'exploite.",
+  "statut": "En recherche de stage de fin d'études — 5 à 6 mois à partir d'avril 2027",
+  "presentation": [
+    "Élève ingénieur en dernière année à l'ISIMA (Clermont Auvergne INP), filière Systèmes d'information et aide à la décision : analyse de données, bases de données, informatique décisionnelle et développement web. J'ai passé un semestre d'échange à l'Université de l'Ouest de Timișoara, en Roumanie, de février à juin 2025.",
+    "Je cherche un stage en data engineering ou en data science, ou en développement web dès qu'il y a une vraie base de données derrière. Ce qui m'intéresse : les services web, les entrepôts et lacs de données, et tout ce qui fait circuler la donnée proprement d'un système à l'autre.",
+    "À côté des cours, je suis engagé dans la vie associative de l'école : membre du conseil d'administration du BDE, trésorier d'un week-end d'accueil au budget de 20 000 €, et cofondateur de l'association Drezzing."
+  ],
+  "competences": [
+    { "groupe": "Données", "items": ["Python", "pandas", "SQL"] },
+    { "groupe": "Bases de données", "items": ["PostgreSQL", "Oracle", "MySQL", "MariaDB", "Cassandra", "MongoDB"] },
+    { "groupe": "Langages", "items": ["Java", "C", "C++"] },
+    { "groupe": "Web", "items": ["JavaScript", "TypeScript", "React", "Svelte", "Django", "Node.js", "HTML / CSS"] },
+    { "groupe": "Outils", "items": ["Git", "Docker", "Linux", "CI/CD"] }
+  ],
+  "langues": ["Français (bilingue)", "Espagnol (bilingue)", "Anglais B2 (TOEIC 935)"],
+  "contact": {
+    "email": "julen.sometgarcia@gmail.com",
+    "github": "https://github.com/happyfury006",
+    "linkedin": "https://www.linkedin.com/in/julen-somet-garcia-65b7b8311/",
+    "cv": "/cv.pdf"
+  }
+}

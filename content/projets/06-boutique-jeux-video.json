@@ -1,0 +1,20 @@
+{
+  "slug": "boutique-jeux-video",
+  "type": "web",
+  "titre": "Boutique de jeux vidéo en PHP",
+  "resume": "Catalogue de jeux vidéo par catégorie avec panier, en PHP et MariaDB : mon premier site adossé à une base de données.",
+  "date": "2024-12",
+  "vedette": false,
+  "stack": ["PHP", "MariaDB", "SQL", "HTML / CSS"],
+  "role": "Projet de développement web à l'ISIMA (2e année), en binôme avec Jocelin Calas",
+  "liens": { "depot": "https://github.com/happyfury006/projetwebzz2" },
+  "contexte": "À partir d'une base MariaDB fournie (articles, catégories, TVA, paniers), il fallait construire une boutique en ligne en PHP sans framework : afficher les catégories, lister les jeux de chaque catégorie et gérer un panier.",
+  "contributions": [
+    "Mise en page du site et feuille de style : en-tête, formulaires de connexion et d'inscription, cartes produits",
+    "Affichage de la liste des jeux d'une catégorie à partir de la base",
+    "Panier : ajout d'un article avec calcul du prix hors taxes, cumul des quantités quand l'article est déjà présent, et vidage du panier",
+    "Récapitulatif du panier par jointure entre les tables panier et article, avec le total calculé en SQL"
+  ],
+  "difficulte": "Avec le recul, ce projet m'a surtout appris ce qu'il ne faut pas faire : les requêtes étaient construites par concaténation (donc exposées aux injections SQL), les identifiants de la base étaient écrits dans le code et tous les visiteurs partageaient le même panier. Aujourd'hui j'utiliserais des requêtes préparées, une configuration hors du dépôt et un panier lié à la session.",
+  "image": ""
+}

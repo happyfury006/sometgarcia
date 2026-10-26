@@ -1,0 +1,22 @@
+{
+  "slug": "simulation-star-wars",
+  "type": "web",
+  "titre": "Simulation de combat Star Wars en Java",
+  "resume": "Jeu de combat au tour par tour entre deux escouades, conçu pour appliquer quatre design patterns sur un cas concret, avec une interface Swing et un mode joueur contre ordinateur.",
+  "date": "2025-01",
+  "vedette": true,
+  "stack": ["Java 17", "Swing", "JUnit 5", "Maven"],
+  "role": "Projet d'architecture logicielle à l'ISIMA, en binôme avec Jocelin Calas",
+  "liens": { "depot": "https://github.com/happyfury006/projet_archi_log" },
+  "contexte": "Pour le cours d'architecture logicielle, il fallait mettre en œuvre des design patterns sur une simulation. Deux escouades de cinq soldats, côté lumineux contre côté obscur, s'affrontent sur une carte de 8 × 8 cases. On peut jouer un camp contre l'ordinateur ou regarder l'ordinateur jouer les deux. Les soldats de l'ordinateur avancent, attaquent, battent en retraite quand ils sont blessés puis reviennent au combat.",
+  "contributions": [
+    "Abstract Factory : chaque camp fournit sa famille de soldats, le monde demande « un soldat de corps à corps » sans savoir s'il obtient un Twi'lek ou un Zabrak",
+    "State : les modes Attaque et Fuite décident eux-mêmes quand passer de l'un à l'autre selon les points de vie",
+    "Strategy : le corps à corps fonce sur l'ennemi le plus proche, le tir à distance achève l'ennemi le plus affaibli à portée",
+    "Observer : la fenêtre Swing et la console s'abonnent aux événements du monde, le modèle ne dépend pas de l'interface",
+    "Interface graphique et mode joueur : le monde attend l'action du joueur et la valide comme celle de n'importe quel soldat",
+    "24 tests JUnit, dont 200 parties complètes simulées pour vérifier qu'aucun soldat ne sort de la carte ou ne partage une case"
+  ],
+  "difficulte": "La version rendue compilait mais plusieurs bugs faussaient les combats : la portée n'était jamais enregistrée, une distance pouvait être négative, des soldats morts jouaient encore. En reprenant le projet, les simulations automatiques ont aussi révélé un problème d'équilibre : quand un camp jouait tous ses soldats d'un coup, le camp qui commençait gagnait 9 parties sur 10. Les soldats jouent désormais en alternance et les statistiques ont été réglées pour que chaque camp gagne environ une partie sur deux.",
+  "image": "/images/simulation-star-wars.png"
+}
