@@ -1,17 +1,25 @@
 {
   "slug": "data-mining-consommation-electrique",
   "type": "data",
-  "titre": "Data mining sur la consommation électrique",
-  "resume": "Analyse de données de consommation électrique, réalisée pendant mon semestre à l'Université de l'Ouest de Timișoara.",
+  "titre": "Prévoir la consommation électrique d'un foyer",
+  "resume": "Prévision heure par heure de la consommation d'une maison à partir de quatre ans de mesures, en comparant six modèles à des références naïves. Réalisé pendant mon semestre à l'Université de l'Ouest de Timișoara, puis corrigé.",
   "date": "2025-06",
   "vedette": true,
-  "stack": ["Python", "pandas", "[À compléter]"],
-  "role": "[À REMPLACER] Projet individuel ou de groupe (combien de personnes, ta partie)",
+  "stack": ["Python", "pandas", "scikit-learn", "XGBoost", "LightGBM", "statsmodels", "Jupyter"],
+  "role": "Projet individuel de data mining, Université de l'Ouest de Timișoara",
   "liens": {},
-  "question": "[À REMPLACER] La question de départ : qu'est-ce que vous cherchiez à trouver ou à prévoir ?",
-  "donnees": "[À REMPLACER] La source des données, leur volume et la période couverte.",
-  "methode": "[À REMPLACER] Nettoyage, variables construites, algorithmes testés (clustering, règles d'association, classification…).",
-  "resultats": [],
-  "conclusion": "[À REMPLACER] Ce que vous avez trouvé, et la principale limite.",
-  "image": ""
+  "question": "Peut-on prévoir la consommation électrique d'une maison pour l'heure suivante à partir de son historique ? Et les modèles d'apprentissage font-ils vraiment mieux que la règle la plus simple : répéter la consommation de l'heure précédente ?",
+  "donnees": "Le jeu de données UCI « Individual household electric power consumption » : 2 075 259 mesures, une par minute, d'une maison de Sceaux entre décembre 2006 et novembre 2010. Il contient la puissance active et réactive, la tension, l'intensité et trois sous-compteurs. 1,25 % des minutes manquent, par blocs allant jusqu'à cinq jours.",
+  "methode": "L'exploration montre trois cycles : la consommation double presque en hiver et s'effondre chaque mois d'août, elle culmine vers 20 h, et le week-end elle reste élevée toute la journée. Les données sont regroupées par heure, puis chaque prévision s'appuie sur les 24 dernières heures, la même heure la semaine précédente, l'heure, le jour et le mois. Les modèles apprennent sur 2007 à 2009 et sont évalués sur les onze mois de 2010. Régression linéaire, Random Forest, XGBoost, LightGBM, réseau de neurones et ARIMA saisonnier sont comparés à trois références naïves, avec les mêmes informations pour tous.",
+  "graphiques": [
+    { "src": "/images/consommation-electrique-saisons.png", "legende": "Quatre ans de consommation : un cycle annuel marqué, avec un creux chaque mois d'août." },
+    { "src": "/images/consommation-electrique-journee.png", "legende": "À gauche, la journée type en semaine et le week-end. À droite, le modèle divise l'erreur par deux à 7 h, au réveil, mais fait à peine mieux que la persistance en milieu de journée." }
+  ],
+  "resultats": [
+    { "valeur": "−16 %", "libelle": "d'erreur par rapport à la simple répétition de l'heure précédente (Random Forest)" },
+    { "valeur": "0,33 kW", "libelle": "d'erreur moyenne sur 2010, pour une consommation moyenne de 1,07 kW" },
+    { "valeur": "÷ 2", "libelle": "l'erreur à 7 h, quand le modèle anticipe le réveil (0,41 kW contre 0,79 kW)" }
+  ],
+  "conclusion": "Random Forest, XGBoost et LightGBM arrivent à égalité, LightGBM s'entraînant vingt fois plus vite. La première version du projet concluait que le LSTM était prometteur sans avoir jamais évalué les modèles. Elle normalisait aussi les données sur toute la période, test compris, et comparait ARIMA dans des conditions différentes des autres modèles. Une fois ces erreurs corrigées et une référence naïve ajoutée, le gain reste réel mais modeste : les pics soudains, quand un appareil s'allume, ne se devinent pas à partir de la consommation passée. Les prochaines variables à ajouter seraient la météo et la présence des occupants.",
+  "image": "/images/consommation-electrique.png"
 }

@@ -168,14 +168,24 @@ function listeProjets() {
   return page({ titre: "Missions", description: "Projets data et développement de " + site.nom, chemin: "/projets/", contenu });
 }
 
+// Graphiques supplémentaires : liste de { "src", "legende" }, affichés avec leur légende
+const graphiques = (p) => (p.graphiques || [])
+  .map((g) => `<figure class="visuel visuel-legende"><img src="${esc(g.src)}" alt="${esc(g.legende)}" loading="lazy"><figcaption>${esc(g.legende)}</figcaption></figure>`)
+  .join("");
+
 function ficheData(p) {
+  const lettre = (n) => "ABCDE"[n];
+  const blocs = [
+    ["La question", `<p class="question">${esc(p.question)}</p>`],
+    ["Les données", `<p>${esc(p.donnees)}</p>`],
+    ["La méthode", `<p>${esc(p.methode)}</p>`],
+    ...(p.graphiques?.length ? [["En graphiques", graphiques(p)]] : []),
+    ["Ce que j'en retiens", `<p>${esc(p.conclusion)}</p>`],
+  ];
   return `
   ${p.resultats?.length ? `<div class="chiffres">${p.resultats.map((r) => `<div class="chiffre"><strong>${esc(r.valeur)}</strong><span>${esc(r.libelle)}</span></div>`).join("")}</div>` : ""}
   ${p.image ? `<figure class="visuel"><img src="${esc(p.image)}" alt="Résultat du projet ${esc(p.titre)}" loading="lazy"></figure>` : ""}
-  ${section("La question", `<p class="question">${esc(p.question)}</p>`, "A")}
-  ${section("Les données", `<p>${esc(p.donnees)}</p>`, "B")}
-  ${section("La méthode", `<p>${esc(p.methode)}</p>`, "C")}
-  ${section("Ce que j'en retiens", `<p>${esc(p.conclusion)}</p>`, "D")}`;
+  ${blocs.map(([titre, corps], i) => section(titre, corps, lettre(i))).join("\n  ")}`;
 }
 
 function ficheWeb(p) {

@@ -4,7 +4,7 @@
   "titre": "Boutique de jeux vidéo en PHP",
   "resume": "Catalogue de jeux vidéo par catégorie avec panier, en PHP et MariaDB : mon premier site adossé à une base de données.",
   "date": "2024-12",
-  "vedette": false,
+  "vedette": true,
   "stack": ["PHP", "MariaDB", "SQL", "HTML / CSS"],
   "role": "Projet de développement web à l'ISIMA (2e année), en binôme avec Jocelin Calas",
   "liens": { "depot": "https://github.com/happyfury006/projetwebzz2" },

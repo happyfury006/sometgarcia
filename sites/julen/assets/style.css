@@ -176,6 +176,7 @@ main { flex: 1; }
 .chiffre strong { display: block; font-family: var(--titre); font-size: 2rem; color: var(--cyan); line-height: 1.1; }
 .chiffre span { font-size: 0.9rem; color: var(--texte-doux); }
 .visuel { margin: 1.5rem 0; border: 1px solid var(--ligne); border-radius: var(--rayon); overflow: hidden; }
+.visuel-legende figcaption { padding: 0.75rem 1rem; font-size: 0.9rem; color: var(--texte-doux); border-top: 1px solid var(--ligne); background: var(--surface-forte); }
 .liste { padding-left: 1.2rem; }
 .liste li { margin-bottom: 0.5rem; }
 .liste li::marker { color: var(--ambre); content: "▸  "; }
