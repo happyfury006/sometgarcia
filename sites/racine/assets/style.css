@@ -1,0 +1,102 @@
+/* ===== Jetons ===== */
+:root {
+  --fond: #000000;
+  --texte: #ffffff;
+  --texte-doux: #cccccc;
+  /* Portfolio de Julen */
+  --julen-fond: #05070d;
+  --julen-ambre: #ffb547;
+  --julen-cyan: #62e3ff;
+  /* Site de Maitane */
+  --maitane-accent: #a88b70;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--fond);
+  color: var(--texte);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 1px solid var(--texte); outline-offset: -6px; }
+
+/* ===== Titre ===== */
+.titre { padding: 1.5rem 16px; text-align: center; border-bottom: 1px solid #1c1c1c; }
+.titre h1 { margin: 0; font-weight: 400; font-size: 0.95rem; letter-spacing: 0.45em; text-transform: uppercase; }
+
+/* ===== Panneaux ===== */
+.panneaux { flex: 1; display: flex; }
+.panneau {
+  position: relative; flex: 1; display: flex; align-items: flex-end; overflow: hidden;
+  min-height: 60vh; padding: clamp(2rem, 5vw, 4rem) clamp(16px, 5vw, 4rem);
+  transition: flex-grow 0.6s ease;
+}
+.panneau:hover, .panneau:focus-visible { flex-grow: 1.35; }
+.panneau-contenu { position: relative; display: flex; flex-direction: column; gap: 0.6rem; }
+.panneau-nom { font-size: clamp(3.5rem, 9vw, 6.5rem); line-height: 1; }
+.panneau-role, .panneau-detail, .panneau-lien { max-width: 34ch; }
+.panneau-lien { margin-top: 1.25rem; transition: transform 0.3s ease; }
+.panneau:hover .panneau-lien { transform: translateX(6px); }
+
+/* Julen : nuit étoilée, typographie technique */
+.panneau-julen {
+  background:
+    radial-gradient(1px 1px at 12% 22%, #fff, transparent),
+    radial-gradient(1px 1px at 68% 14%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 82% 46%, var(--julen-cyan), transparent),
+    radial-gradient(1px 1px at 34% 58%, #fff, transparent),
+    radial-gradient(1px 1px at 52% 30%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1.5px 1.5px at 22% 80%, var(--julen-ambre), transparent),
+    radial-gradient(1px 1px at 90% 78%, #fff, transparent),
+    radial-gradient(1px 1px at 6% 50%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(ellipse 90% 70% at 80% -10%, rgba(40, 70, 160, 0.4), transparent 70%),
+    var(--julen-fond);
+}
+.panneau-julen .panneau-nom { font-family: "Chakra Petch", sans-serif; font-weight: 600; font-size: clamp(3rem, 8vw, 5.5rem); }
+.panneau-julen .sigle { color: var(--julen-ambre); font-size: 0.5em; vertical-align: middle; margin-right: 0.3em; }
+.panneau-julen .panneau-role, .panneau-julen .panneau-lien {
+  font-family: "IBM Plex Mono", monospace; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase;
+}
+.panneau-julen .panneau-role { color: var(--julen-cyan); }
+.panneau-julen .panneau-detail { font-family: "IBM Plex Mono", monospace; font-size: 0.9rem; color: #93a0ba; }
+.panneau-julen .panneau-lien { color: var(--julen-ambre); }
+
+/* Maitane : photo noir et blanc, signature manuscrite */
+.panneau-maitane { background: #111; }
+.panneau-fond {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 40% 50%;
+  opacity: 0.55; transition: opacity 0.6s ease, transform 1.2s ease;
+}
+.panneau-maitane::after {
+  content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent 60%);
+}
+.panneau-maitane .panneau-contenu { z-index: 1; }
+.panneau-maitane:hover .panneau-fond { opacity: 0.7; transform: scale(1.03); }
+.panneau-maitane .panneau-nom { font-family: "Allura", cursive; font-size: clamp(4rem, 11vw, 7.5rem); }
+.panneau-maitane .panneau-role, .panneau-maitane .panneau-lien {
+  font-family: "Nunito Sans", sans-serif; font-weight: 600; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+}
+.panneau-maitane .panneau-detail { font-size: 1.15rem; color: var(--texte-doux); }
+.panneau-maitane .panneau-lien { color: var(--maitane-accent); }
+
+/* ===== 404 ===== */
+.perdu { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; padding: 16px; text-align: center; }
+.perdu h1 { margin: 0; font-weight: 400; font-size: clamp(2rem, 6vw, 3.5rem); }
+.perdu a { font-family: "Nunito Sans", sans-serif; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--maitane-accent); }
+
+/* ===== Petits écrans : panneaux empilés ===== */
+@media (max-width: 720px) {
+  .panneaux { flex-direction: column; }
+  .panneau { min-height: 50vh; }
+  .panneau:hover, .panneau:focus-visible { flex-grow: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .panneau, .panneau-fond, .panneau-lien { transition: none; }
+}

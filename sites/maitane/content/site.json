@@ -1,0 +1,21 @@
+{
+  "url": "https://maitane.sometgarcia.fr",
+  "nom": "Maitane Somet García",
+  "metier": "Fashion designer",
+  "description": "Maitane Somet García, fashion designer specializing in prêt-à-porter, in her final year at the Istituto Europeo di Design in Madrid.",
+  "accroche": [
+    "Thoughts, stories",
+    "and ideas"
+  ],
+  "logo": "/images/logo.png",
+  "apropos": {
+    "photo": "/images/maitane.webp",
+    "texte": "Hi! I’m Maitane Somet García, a fashion designer currently in my final year at the Istituto Europeo di Design (IED) in Madrid, specializing in Prêt-à-porter. My background in Applied Arts, studied in France, and my bilingual education in English Literature and Geopolitics have given me a unique, global perspective that shapes my approach to design.\n\nThrough various projects and internships, including at The Fashion Place with designer Amaia Sáez de Buruaga and Cléa Studio in Madrid, I’ve developed strong skills in pattern-making, garment construction, and custom design. My freelance work spans diverse projects, each reinforcing my commitment to creativity, craftsmanship, and a unique point of view in fashion design."
+  },
+  "contact": {
+    "telephone": "+33 6 52 71 89 58",
+    "email": "maitanesgm@gmail.com",
+    "instagram": "https://www.instagram.com/_maitanesometgarcia/",
+    "linkedin": "https://www.linkedin.com/in/maitane-somet-garc%C3%ADa-808036234/"
+  }
+}

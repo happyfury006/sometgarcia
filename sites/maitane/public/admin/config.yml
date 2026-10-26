@@ -1,0 +1,116 @@
+# Configuration de l'admin du site de Maitane (Sveltia CMS)
+# Chaque « Publier » crée un commit sur main, ce qui relance le déploiement (1 à 2 minutes).
+backend:
+  name: github
+  repo: happyfury006/sometgarcia
+  branch: main
+
+site_url: https://maitane.sometgarcia.fr
+display_url: https://maitane.sometgarcia.fr
+
+media_folder: /sites/maitane/public/images
+public_folder: /images
+
+# Les photos envoyées sont converties en WebP et réduites : le site reste léger
+media_libraries:
+  default:
+    config:
+      max_file_size: 30000000
+      transformations:
+        raster_image:
+          format: webp
+          quality: 82
+          width: 2000
+          height: 2000
+
+collections:
+  - name: collections
+    label: Collections
+    label_singular: Collection
+    description: Chaque collection apparaît sur l'accueil et a sa propre page, construite avec des blocs.
+    folder: /sites/maitane/content/collections
+    format: json
+    slug: "{{fields.slug}}"
+    identifier_field: titre
+    summary: "{{titre}} ({{annee}})"
+    sortable_fields: [annee, titre]
+    preview_path: "/collections/{{fields.slug}}/"
+    fields:
+      - { name: titre, label: Titre, widget: string }
+      - name: slug
+        label: Adresse de la page
+        widget: string
+        hint: "Minuscules et tirets, par exemple racines-eternelles. Ne plus la changer une fois publiée."
+        pattern: ["^[a-z0-9]+(-[a-z0-9]+)*$", "Uniquement des minuscules sans accents, des chiffres et des tirets"]
+      - { name: annee, label: Année, widget: number, value_type: int }
+      - { name: couverture, label: Photo de couverture, widget: image, hint: "Affichée sur l'accueil et en haut de la page de la collection" }
+      - name: blocs
+        label: Contenu de la page
+        label_singular: bloc
+        widget: list
+        required: false
+        collapsed: auto
+        types:
+          - name: texte
+            label: Texte
+            summary: "{{titre}}"
+            fields:
+              - { name: titre, label: Titre, widget: string, required: false }
+              - { name: texte, label: Texte, widget: text, hint: "Laisser une ligne vide entre deux paragraphes" }
+          - name: image
+            label: Image
+            summary: "{{legende}}"
+            fields:
+              - { name: src, label: Image, widget: image }
+              - { name: legende, label: Légende, widget: string, required: false }
+              - name: format
+                label: Taille
+                widget: select
+                default: large
+                options:
+                  - { label: Toute la largeur, value: large }
+                  - { label: Moyenne et centrée, value: moyen }
+          - name: duo
+            label: Deux images côte à côte
+            summary: "{{legende}}"
+            fields:
+              - { name: images, label: Images, widget: image, multiple: true, min: 2, max: 2 }
+              - { name: legende, label: Légende, widget: string, required: false }
+          - name: galerie
+            label: Galerie
+            fields:
+              - { name: images, label: Images, widget: image, multiple: true, min: 1 }
+          - name: citation
+            label: Citation
+            summary: "{{auteur}}"
+            fields:
+              - { name: texte, label: Citation, widget: text }
+              - { name: auteur, label: Auteur, widget: string, required: false }
+
+  - name: pages
+    label: Pages du site
+    files:
+      - name: site
+        label: Accueil, À propos et Contact
+        file: sites/maitane/content/site.json
+        fields:
+          - { name: url, label: Adresse du site, widget: hidden, default: "https://maitane.sometgarcia.fr" }
+          - { name: nom, label: Nom, widget: string }
+          - { name: metier, label: Métier, widget: string, hint: "Affiché dans le titre de l'onglet" }
+          - { name: description, label: Description pour les moteurs de recherche, widget: text }
+          - { name: accroche, label: "Grand titre de l'accueil (une ligne par élément)", widget: list }
+          - { name: logo, label: Logo, widget: image }
+          - name: apropos
+            label: À propos
+            widget: object
+            fields:
+              - { name: photo, label: Portrait, widget: image }
+              - { name: texte, label: Texte, widget: text, hint: "Laisser une ligne vide entre deux paragraphes" }
+          - name: contact
+            label: Contact
+            widget: object
+            fields:
+              - { name: telephone, label: Téléphone, widget: string, required: false }
+              - { name: email, label: Email, widget: string, required: false }
+              - { name: instagram, label: Lien Instagram, widget: string, required: false }
+              - { name: linkedin, label: Lien LinkedIn, widget: string, required: false }

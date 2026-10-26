@@ -1,0 +1,151 @@
+/* ===== Jetons (repris du thème Ona Fashion de l'ancien site) ===== */
+:root {
+  --fond: #000000;
+  --fond-clair: #1c1c1c;
+  --trait: #1c1c1c;
+  --texte: #ffffff;
+  --texte-doux: #cccccc;
+  --texte-leger: #909090;
+  --accent: #a88b70;
+  --titre: "Cormorant Garamond", Georgia, serif;
+  --corps: "Nunito Sans", system-ui, sans-serif;
+  --signature: "Allura", "Cormorant Garamond", cursive;
+  --largeur: 1200px;
+  --marge: max(16px, 4vw);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--fond);
+  color: var(--texte-doux);
+  font: 400 1rem/1.6 var(--corps);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--texte); text-decoration: none; transition: color 0.2s; }
+a:hover { color: var(--accent); }
+:focus-visible { outline: 1px solid var(--accent); outline-offset: 4px; }
+img { max-width: 100%; height: auto; display: block; }
+h1, h2, h3 { font-family: var(--titre); font-weight: 400; color: var(--texte); line-height: 1.15; margin: 0 0 0.6em; }
+h2 { font-size: clamp(2rem, 4vw, 2.5rem); }
+p { margin: 0 0 1em; }
+.sauter { position: absolute; left: -999px; top: 0; background: var(--texte); color: var(--fond); padding: 0.5rem 1rem; z-index: 10; }
+.sauter:focus { left: 1rem; }
+main { flex: 1; width: 100%; }
+
+/* ===== En-tête ===== */
+.entete {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem 2rem; flex-wrap: wrap;
+  width: 100%; max-width: var(--largeur); margin-inline: auto; padding: 1.5rem var(--marge);
+}
+.marque { display: flex; align-items: center; gap: 0.9rem; color: var(--texte); }
+.marque:hover { color: var(--texte); }
+.marque-logo { width: 48px; height: 48px; border-radius: 50%; }
+.marque-nom { font-family: var(--signature); font-size: clamp(1.6rem, 4vw, 2.1rem); line-height: 1; white-space: nowrap; }
+.entete nav { display: flex; gap: clamp(1.25rem, 3vw, 2.5rem); }
+.entete nav a {
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--texte-doux);
+}
+.entete nav a:hover { color: var(--accent); }
+
+/* ===== Accroche ===== */
+.accroche { padding: clamp(4rem, 12vw, 9rem) var(--marge) clamp(3rem, 8vw, 6rem); text-align: center; }
+.accroche h1 {
+  font-size: clamp(2.1rem, 5vw, 4.5rem); text-transform: uppercase;
+  letter-spacing: clamp(0.15rem, 1.1vw, 1rem); line-height: 1.25; margin: 0;
+}
+
+/* ===== Collections ===== */
+.collections ol { list-style: none; margin: 0 auto; padding: 0 var(--marge); max-width: var(--largeur); }
+.collections li + li { margin-top: clamp(4rem, 10vw, 8rem); padding-top: clamp(4rem, 10vw, 8rem); border-top: 1px solid var(--trait); }
+.collection { margin: 0; width: min(100%, 860px); }
+.collections li:nth-child(even) .collection { margin-left: auto; }
+.collection a { display: block; color: inherit; }
+.collection img { width: 100%; transition: opacity 0.4s; }
+.collection a:hover img { opacity: 0.85; }
+.collection figcaption { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding-top: 1.1rem; }
+.collection-titre { font-family: var(--titre); font-size: clamp(1.4rem, 3vw, 2rem); color: var(--texte); }
+.collection a:hover .collection-titre { color: var(--accent); }
+.collection-annee { font-size: 0.875rem; letter-spacing: 0.15em; color: var(--texte-leger); }
+
+/* ===== À propos ===== */
+.apropos {
+  display: grid; grid-template-columns: minmax(0, 35%) minmax(0, 1fr); gap: clamp(2rem, 5vw, 5rem); align-items: center;
+  max-width: var(--largeur); margin: clamp(6rem, 14vw, 11rem) auto 0; padding-inline: var(--marge);
+}
+.apropos p { font-size: clamp(1.05rem, 1.6vw, 1.2rem); line-height: 1.75; }
+
+/* ===== Fiche collection ===== */
+.fiche { max-width: var(--largeur); margin-inline: auto; padding-inline: var(--marge); }
+.fiche-entete { max-width: 760px; margin: clamp(3rem, 8vw, 6rem) auto clamp(3rem, 6vw, 5rem); text-align: center; }
+.fiche-entete h1 { font-size: clamp(2.6rem, 7vw, 5rem); text-transform: uppercase; letter-spacing: 0.08em; }
+.fiche-annee { font-size: 0.8rem; letter-spacing: 0.3em; color: var(--texte-leger); margin-bottom: 0.75rem; }
+.fiche-couverture { margin: 0 0 clamp(3rem, 8vw, 6rem); }
+.fiche-couverture img { width: 100%; }
+.retour { display: inline-block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--texte-leger); margin-bottom: 2rem; }
+
+/* Blocs d'une collection */
+.bloc { margin: 0 auto clamp(3rem, 8vw, 6rem); }
+.bloc figcaption { padding-top: 0.9rem; font-size: 0.875rem; letter-spacing: 0.05em; color: var(--texte-leger); }
+.bloc-texte { max-width: 680px; }
+.bloc-texte h2 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); }
+.bloc-texte p { font-size: clamp(1.05rem, 1.6vw, 1.2rem); line-height: 1.8; }
+.bloc-image img { width: 100%; }
+.bloc-image-moyen { max-width: 760px; }
+.bloc-duo > div { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1rem, 3vw, 2rem); align-items: start; }
+.bloc-duo img { width: 100%; }
+.galerie { columns: 2 320px; column-gap: clamp(1rem, 3vw, 2rem); }
+.galerie figure { margin: 0 0 clamp(1rem, 3vw, 2rem); break-inside: avoid; }
+.bloc-citation { max-width: 860px; padding: 0 var(--marge); text-align: center; }
+.bloc-citation p { font-family: var(--titre); font-style: italic; font-size: clamp(1.6rem, 4vw, 2.6rem); line-height: 1.3; color: var(--texte); }
+.bloc-citation cite { font-style: normal; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
+.suite {
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0.5rem 2rem;
+  margin-top: clamp(3rem, 8vw, 6rem); padding-top: 2rem; border-top: 1px solid var(--trait);
+}
+.suite span { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--texte-leger); }
+.suite a { font-family: var(--titre); font-size: clamp(1.4rem, 3vw, 2rem); }
+.perdu p { margin: 1.5rem 0 2.5rem; }
+
+/* ===== Pied de page / contact ===== */
+.pied { width: 100%; max-width: var(--largeur); margin: clamp(6rem, 14vw, 11rem) auto 0; padding: 0 var(--marge) 1.5rem; }
+.pied h2 { font-weight: 700; margin-bottom: 2rem; }
+.pied-colonnes { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2.5rem; padding-bottom: 3rem; }
+.pied-identite { display: flex; align-items: center; gap: 1.5rem; }
+.pied-identite img { width: 96px; height: 96px; border-radius: 50%; }
+.pied-tel { color: var(--texte-doux); }
+.pied-label { font-size: 1.125rem; color: var(--texte-leger); margin-bottom: 0.9rem; }
+.reseaux { list-style: none; display: flex; gap: 0.75rem; margin: 0; padding: 0; }
+.reseau {
+  display: grid; place-items: center; width: 44px; height: 44px;
+  background: var(--fond-clair); color: var(--texte); fill: currentColor; transition: background 0.2s, color 0.2s;
+}
+.reseau:hover { background: var(--accent); color: var(--fond); }
+.reseau svg { fill: currentColor; }
+.pied-bas {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 2rem;
+  padding-top: 2rem; border-top: 1px solid var(--trait); font-size: 0.75rem; color: var(--texte-leger);
+}
+.pied-bas a { color: var(--texte-leger); }
+.pied-bas a:hover { color: var(--accent); }
+
+/* ===== Apparitions au défilement ===== */
+.js .apparait { opacity: 0; transform: translateY(24px); transition: opacity 0.9s ease, transform 0.9s ease; }
+.js .apparait.visible { opacity: 1; transform: none; }
+
+/* ===== Petits écrans ===== */
+@media (max-width: 720px) {
+  .entete { justify-content: center; text-align: center; }
+  .apropos { grid-template-columns: minmax(0, 1fr); }
+  .bloc-duo > div { grid-template-columns: minmax(0, 1fr); }
+  .apropos img { max-width: min(100%, 420px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .apparait { opacity: 1; transform: none; transition: none; }
+}

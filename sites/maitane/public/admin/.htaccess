@@ -1,0 +1,6 @@
+# L'admin charge Sveltia CMS depuis unpkg et parle à l'API GitHub :
+# CSP recommandée par https://sveltiacms.app/en/docs/security (backend GitHub)
+<IfModule mod_headers.c>
+  Header always set Content-Security-Policy "default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' https://cdn.jsdelivr.net; img-src 'self' blob: data: https://*.githubusercontent.com; media-src blob:; frame-src blob:; script-src 'self' https://unpkg.com; connect-src 'self' blob: data: https://unpkg.com https://api.github.com https://www.githubstatus.com; manifest-src blob:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+  Header always set X-Robots-Tag "noindex, nofollow"
+</IfModule>

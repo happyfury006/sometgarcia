@@ -1,9 +1,9 @@
 {
-  "name": "julen-sometgarcia",
+  "name": "sometgarcia",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Site vitrine de Julen Somet García — générateur statique sans dépendance",
+  "description": "Sites du domaine sometgarcia.fr (accueil, Julen, Maitane) — générateur statique sans dépendance",
   "engines": { "node": ">=20" },
   "scripts": {
     "build": "node build.mjs",

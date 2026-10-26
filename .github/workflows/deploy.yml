@@ -1,6 +1,8 @@
 name: Déploiement OVH
 
 # Se lance à chaque push sur main, ou à la main depuis l'onglet Actions de GitHub.
+# Chaque site de dist/ est envoyé dans son propre dossier OVH. Un site dont le secret
+# OVH_DOSSIER_<SITE> est vide n'est pas déployé : on peut activer les sites un par un.
 on:
   push:
     branches: [main]
@@ -20,21 +22,17 @@ jobs:
         with:
           node-version: 22
 
-      - name: Générer le site
+      - name: Générer les sites
         run: node build.mjs
 
-      - name: Vérifier le dossier cible
-        # Garde-fou : le miroir supprime les fichiers distants absents de dist/.
-        # Un mauvais dossier (racine, www, wordpress…) effacerait d'autres sites.
+      - name: Vérifier les dossiers cibles
+        # Garde-fou : le miroir supprime les fichiers distants absents de dist/<site>/.
+        # Un mauvais dossier (racine de l'hébergement, dossier d'un autre site…) l'effacerait.
         env:
-          DOSSIER: ${{ secrets.OVH_DOSSIER }}
-        run: |
-          case "$DOSSIER" in
-            ""|"/"|"."|"./"|"www"|"www/"|"/www"|"/www/")
-              echo "::error::OVH_DOSSIER vaut '$DOSSIER' : refusé. Utilise un dossier dédié, ex. 'julen'."
-              exit 1 ;;
-          esac
-          echo "Dossier cible : $DOSSIER"
+          RACINE: ${{ secrets.OVH_DOSSIER_RACINE }}
+          JULEN: ${{ secrets.OVH_DOSSIER_JULEN }}
+          MAITANE: ${{ secrets.OVH_DOSSIER_MAITANE }}
+        run: bash scripts/verifier-dossiers.sh
 
       - name: Installer lftp
         run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
@@ -44,12 +42,19 @@ jobs:
           HOTE: ${{ secrets.OVH_HOTE }}
           UTILISATEUR: ${{ secrets.OVH_UTILISATEUR }}
           MOT_DE_PASSE: ${{ secrets.OVH_MOT_DE_PASSE }}
-          DOSSIER: ${{ secrets.OVH_DOSSIER }}
+          RACINE: ${{ secrets.OVH_DOSSIER_RACINE }}
+          JULEN: ${{ secrets.OVH_DOSSIER_JULEN }}
+          MAITANE: ${{ secrets.OVH_DOSSIER_MAITANE }}
         run: |
+          miroirs=""
+          ajouter() { [ -n "$2" ] && miroirs="$miroirs mirror --reverse --delete --verbose --parallel=4 dist/$1/ \"$2\";"; }
+          ajouter racine "$RACINE"
+          ajouter julen "$JULEN"
+          ajouter maitane "$MAITANE"
           lftp -c "
             set sftp:auto-confirm yes;
             set net:max-retries 2;
             set net:timeout 30;
             open -u \"$UTILISATEUR\",\"$MOT_DE_PASSE\" sftp://$HOTE;
-            mirror --reverse --delete --verbose --parallel=4 dist/ \"$DOSSIER\";
+            $miroirs
           "

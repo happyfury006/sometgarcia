@@ -1,0 +1,22 @@
+{
+  "url": "https://sometgarcia.fr",
+  "nom": "Somet García",
+  "description": "Julen et Maitane Somet García : un élève ingénieur en informatique et une créatrice de mode.",
+  "membres": [
+    {
+      "id": "julen",
+      "prenom": "Julen",
+      "role": "Élève ingénieur en informatique",
+      "detail": "Données, bases de données et développement web",
+      "url": "https://julen.sometgarcia.fr"
+    },
+    {
+      "id": "maitane",
+      "prenom": "Maitane",
+      "role": "Créatrice de mode",
+      "detail": "Prêt-à-porter · Istituto Europeo di Design, Madrid",
+      "url": "https://maitane.sometgarcia.fr",
+      "image": "/images/maitane.webp"
+    }
+  ]
+}
