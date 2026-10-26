@@ -15,6 +15,11 @@ rm -rf "$CIBLE"
 mkdir -p "$CIBLE"
 cp -R "$SOURCE/associatif/." "$CIBLE/"
 rm -f "$CIBLE/README.md"
+# empreinte du CSS dans son adresse (style.css?v=…) : les navigateurs gardent les CSS
+# 7 jours, et affichaient la nouvelle page avec l'ancienne feuille de style
+EMPREINTE="$(shasum -a 256 "$CIBLE/style.css" | cut -c1-8)"
+sed -i.bak "s#href=\"style.css\"#href=\"style.css?v=$EMPREINTE\"#" "$CIBLE/index.html"
+rm -f "$CIBLE/index.html.bak"
 cp commun/associatif.htaccess "$CIBLE/.htaccess"
 chmod -R u=rwX,go=rX "$CIBLE"  # lisible par le serveur web, quels que soient les droits d'origine
 echo "✓ site associatif publié dans $CIBLE"
