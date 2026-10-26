@@ -1,0 +1,34 @@
+{
+  "slug": "catane-jeu-de-cartes",
+  "type": "web",
+  "titre": "Catane, le jeu de cartes : IA Monte-Carlo en C",
+  "resume": "Un jeu de cartes à deux inspiré de Catane, en C avec SDL2, contre une IA MCTS qui ne triche pas. Le second jeu de notre projet de 1re année, resté inachevé puis repris et terminé.",
+  "date": "2024-06",
+  "vedette": true,
+  "stack": [
+    "C",
+    "SDL2",
+    "MCTS",
+    "Makefile"
+  ],
+  "role": "Projet de 1re année à l'ISIMA, équipe de 3 : règles et structures du jeu, puis reprise de l'ensemble pour le terminer",
+  "liens": {
+    "depot": "https://github.com/happyfury006/projet-zz1/tree/main/jeu2"
+  },
+  "contexte": "Après le Quantik, nous avons commencé un second jeu : un duel de cartes inspiré de Catane, avec des ressources, un marché, une pioche et des constructions qui rapportent des points. À la fin du projet, il ne compilait pas : deux interfaces SDL concurrentes, une IA réduite à un squelette, et des règles incomplètes.",
+  "contributions": [
+    "Un état de partie unique : chaque joueur gardait sa propre copie de la pioche, du marché et de la défausse, qu'il fallait synchroniser à chaque action",
+    "Règles complétées d'après notre code et le texte des cartes : faces A et B des routes et chevaliers, ville qui renouvelle le marché, fin de partie quand la pioche est vide",
+    "IA MCTS : l'arbre couvre les actions du tour (échanges, construction), chaque branche est évaluée en simulant des parties jusqu'au bout",
+    "Interface SDL reconstruite sur les images de Valentin : marché, main, constructions avec leur coût, actions possibles en surbrillance, partie à deux avec écran de passage de main",
+    "Tests : aucune des 62 cartes ne se perd sur des centaines de parties, et l'IA bat une stratégie gloutonne environ trois fois sur quatre"
+  ],
+  "difficulte": "Le jeu repose sur le hasard de la pioche et sur une information cachée : la main de l'adversaire. Un minimax classique ne convient pas, d'où le choix du MCTS. Pour que l'IA ne triche pas, chaque simulation commence par retirer au hasard la main adverse parmi les cartes qu'elle ne connaît pas. Et comme un même coup peut mener à des pioches différentes, l'arbre ne stocke que les suites d'actions : l'état de la partie est rejoué à chaque simulation.",
+  "image": "/images/catane.webp",
+  "graphiques": [
+    {
+      "src": "/images/catane-fin.webp",
+      "legende": "Fin de partie contre l'IA, avec le score des deux joueurs."
+    }
+  ]
+}

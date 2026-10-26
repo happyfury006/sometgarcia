@@ -1,13 +1,21 @@
 {
   "slug": "quantik",
   "type": "web",
-  "titre": "Quantik : jeu de plateau en C contre l'ordinateur",
+  "titre": "Quantik : jeu de plateau en C contre l'ordinateur",
   "resume": "Le jeu de société Quantik en C, avec une interface graphique SDL2 et une IA minimax alpha-bêta. Commencé en équipe en 1re année sans jamais être terminé, puis repris pour le rendre jouable.",
   "date": "2024-06",
   "vedette": true,
-  "stack": ["C", "SDL2", "SDL2_image", "Minimax alpha-bêta", "Makefile"],
+  "stack": [
+    "C",
+    "SDL2",
+    "SDL2_image",
+    "Minimax alpha-bêta",
+    "Makefile"
+  ],
   "role": "Projet de 1re année à l'ISIMA, équipe de 3 : règles du jeu, puis reprise de l'ensemble pour le terminer",
-  "liens": { "depot": "https://github.com/happyfury006/projet-zz1/tree/quantik" },
+  "liens": {
+    "depot": "https://github.com/happyfury006/projet-zz1/tree/main/jeu1"
+  },
   "contexte": "Le Quantik se joue sur un plateau 4 × 4 avec quatre formes : on gagne en posant la quatrième forme différente d'une ligne, d'une colonne ou d'un carré, et on n'a pas le droit de poser une forme là où l'adversaire l'a déjà posée. En équipe de trois, je m'occupais des règles, Valentin de l'interface SDL et Henri de l'IA. À la fin du projet, aucune des trois parties ne fonctionnait avec les autres : le jeu n'était pas jouable.",
   "contributions": [
     "Règles réécrites : la règle de pose était inversée, les carrés n'étaient jamais vérifiés et la victoire comptait quatre pièces au lieu de quatre formes",
@@ -18,6 +26,9 @@
   "difficulte": "La première version de l'IA essayait de construire en mémoire tout l'arbre des coups possibles, avec jusqu'à 64 coups par tour : l'arbre n'était jamais rempli correctement et le programme plantait au premier coup de l'ordinateur. La solution a été de ne plus stocker l'arbre, mais de le parcourir en jouant puis en annulant chaque coup sur un seul plateau, et d'adapter la profondeur au remplissage du plateau : 3 à 6 coups d'avance en début de partie, puis un calcul jusqu'à la fin dès la sixième pièce posée.",
   "image": "/images/quantik.png",
   "graphiques": [
-    { "src": "/images/quantik-fin.png", "legende": "Fin de partie : l'IA a complété le carré en bas à droite avec les quatre formes, mis en évidence en vert." }
+    {
+      "src": "/images/quantik-fin.png",
+      "legende": "Fin de partie : l'IA a complété le carré en bas à droite avec les quatre formes, mis en évidence en vert."
+    }
   ]
 }
