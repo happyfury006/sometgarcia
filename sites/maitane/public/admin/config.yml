@@ -32,7 +32,7 @@ collections:
     format: json
     slug: "{{fields.slug}}"
     identifier_field: titre
-    summary: "{{titre}} ({{annee}})"
+    summary: "{{titre}}"
     sortable_fields: [annee, titre]
     preview_path: "/collections/{{fields.slug}}/"
     fields:

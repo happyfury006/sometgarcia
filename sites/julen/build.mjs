@@ -193,7 +193,8 @@ function ficheWeb(p) {
   ${p.image ? `<figure class="visuel"><img src="${esc(p.image)}" alt="Capture d'écran de ${esc(p.titre)}" loading="lazy"></figure>` : ""}
   ${section("Le contexte", `<p>${esc(p.contexte)}</p>`, "A")}
   ${section("Ce que j'ai fait", `<ul class="liste">${(p.contributions || []).map((c) => `<li>${esc(c)}</li>`).join("")}</ul>`, "B")}
-  ${section("La difficulté", `<p>${esc(p.difficulte)}</p>`, "C")}`;
+  ${section("La difficulté", `<p>${esc(p.difficulte)}</p>`, "C")}
+  ${p.graphiques?.length ? section("En images", graphiques(p), "D") : ""}`;
 }
 
 function fiche(p, i) {
