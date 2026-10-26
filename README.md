@@ -65,6 +65,14 @@ Chaque collection a sa page `/collections/<slug>/` : titre, année, couverture, 
 
 `format` d'une image : `large` (toute la largeur) ou `moyen` (centrée). Dans les textes, une ligne vide sépare deux paragraphes.
 
+### Apparence : polices et couleurs
+
+`content/apparence.json` fixe les polices (titres, texte, signature), les couleurs (fond, fond secondaire, titres, texte, texte discret, accent), la taille et le style du grand titre de l'accueil, et la taille générale du texte. Ce fichier se modifie depuis l'admin : *Pages du site* → *Apparence (polices et couleurs)*.
+
+Le build en tire `assets/theme.css`, chargé après `assets/style.css` (la politique de sécurité du site interdit les styles écrits dans la page), et l'adresse Google Fonts des polices choisies. Le panneau de Maitane sur `sometgarcia.fr` suit aussi sa police de signature, sa police de texte et sa couleur d'accent.
+
+Les polices proposées sont listées dans `commun/polices.json`, avec les graisses demandées à Google Fonts. Pour en ajouter une : vérifier qu'elle existe dans ces graisses sur Google Fonts, l'ajouter à `commun/polices.json` et à la liste correspondante dans `public/admin/config.yml`. Le build refuse une police absente de `commun/polices.json`.
+
 ### L'admin : maitane.sometgarcia.fr/admin
 
 Maitane modifie son site sans toucher au code : elle ajoute des collections, empile des blocs, les réordonne par glisser-déposer et envoie ses photos (converties automatiquement en WebP). **Publier** crée un commit sur `main`, ce qui redéploie le site en 1 à 2 minutes. Tout est historisé dans git : une erreur se corrige en revenant au commit précédent.
@@ -75,6 +83,8 @@ Pour lui donner accès :
 2. Tu l'ajoutes au dépôt : *Settings* → *Collaborators* → *Add people* (rôle Write).
 3. Elle crée un jeton : https://github.com/settings/tokens/new → « Generate new token (classic) », coche **repo**, choisis une expiration, puis copie le jeton.
 4. Sur `/admin`, elle clique sur **Se connecter avec un jeton d'accès** et colle le jeton. Il reste mémorisé dans son navigateur.
+
+L'admin ne fonctionne pas dans Safari avant la version 18.2 (Sveltia utilise `Uint8Array.fromBase64`) : sur un Mac sous macOS 12, utiliser Chrome ou Firefox.
 
 Le bouton « Se connecter avec GitHub » demande en plus un petit service d'authentification ([Sveltia CMS Authenticator](https://github.com/sveltia/sveltia-cms-auth), gratuit sur Cloudflare Workers) et l'option `base_url` dans `config.yml`.
 

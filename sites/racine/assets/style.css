@@ -79,17 +79,17 @@ a { color: inherit; text-decoration: none; }
 }
 .panneau-maitane .panneau-contenu { z-index: 1; }
 .panneau-maitane:hover .panneau-fond { opacity: 0.7; transform: scale(1.03); }
-.panneau-maitane .panneau-nom { font-family: "Allura", cursive; font-size: clamp(4rem, 11vw, 7.5rem); }
+.panneau-maitane .panneau-nom { font-family: var(--maitane-signature, "Allura", cursive); font-size: clamp(4rem, 11vw, 7.5rem); }
 .panneau-maitane .panneau-role, .panneau-maitane .panneau-lien {
-  font-family: "Nunito Sans", sans-serif; font-weight: 600; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+  font-family: var(--maitane-texte, "Nunito Sans", sans-serif); font-weight: 600; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
 }
-.panneau-maitane .panneau-detail { font-size: 1.15rem; color: var(--texte-doux); }
+.panneau-maitane .panneau-detail { font-family: var(--maitane-titre, "Cormorant Garamond", serif); font-size: 1.15rem; color: var(--texte-doux); }
 .panneau-maitane .panneau-lien { color: var(--maitane-accent); }
 
 /* ===== 404 ===== */
 .perdu { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; padding: 16px; text-align: center; }
 .perdu h1 { margin: 0; font-weight: 400; font-size: clamp(2rem, 6vw, 3.5rem); }
-.perdu a { font-family: "Nunito Sans", sans-serif; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--maitane-accent); }
+.perdu a { font-family: var(--maitane-texte, "Nunito Sans", sans-serif); font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--maitane-accent); }
 
 /* ===== Petits écrans : panneaux empilés ===== */
 @media (max-width: 720px) {

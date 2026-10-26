@@ -1,0 +1,21 @@
+{
+  "polices": {
+    "titres": "Cormorant Garamond",
+    "texte": "Nunito Sans",
+    "signature": "Allura"
+  },
+  "couleurs": {
+    "fond": "#000000",
+    "fond_secondaire": "#1C1C1C",
+    "titres": "#FFFFFF",
+    "texte": "#CCCCCC",
+    "texte_discret": "#909090",
+    "accent": "#A88B70"
+  },
+  "accroche": {
+    "taille": 100,
+    "majuscules": true,
+    "espacement": "large"
+  },
+  "taille_texte": 100
+}

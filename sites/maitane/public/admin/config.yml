@@ -114,3 +114,78 @@ collections:
               - { name: email, label: Email, widget: string, required: false }
               - { name: instagram, label: Lien Instagram, widget: string, required: false }
               - { name: linkedin, label: Lien LinkedIn, widget: string, required: false }
+
+      - name: apparence
+        label: Apparence (polices et couleurs)
+        file: sites/maitane/content/apparence.json
+        fields:
+          - name: polices
+            label: Polices
+            widget: object
+            fields:
+              - name: titres
+                label: Titres
+                widget: select
+                hint: Grand titre de l'accueil, noms des collections, « About », « Contact »
+                options:
+                  - { label: "Cormorant Garamond (actuelle)", value: "Cormorant Garamond" }
+                  - { label: "Playfair Display", value: "Playfair Display" }
+                  - { label: "Bodoni Moda", value: "Bodoni Moda" }
+                  - { label: "EB Garamond", value: "EB Garamond" }
+                  - { label: "Libre Baskerville", value: "Libre Baskerville" }
+                  - { label: "DM Serif Display", value: "DM Serif Display" }
+                  - { label: "Cinzel", value: "Cinzel" }
+                  - { label: "Italiana", value: "Italiana" }
+                  - { label: "Prata", value: "Prata" }
+              - name: texte
+                label: Texte
+                widget: select
+                hint: Paragraphes, menu, légendes
+                options:
+                  - { label: "Nunito Sans (actuelle)", value: "Nunito Sans" }
+                  - { label: "Inter", value: "Inter" }
+                  - { label: "Montserrat", value: "Montserrat" }
+                  - { label: "Raleway", value: "Raleway" }
+                  - { label: "Jost", value: "Jost" }
+                  - { label: "Work Sans", value: "Work Sans" }
+                  - { label: "Josefin Sans", value: "Josefin Sans" }
+                  - { label: "Manrope", value: "Manrope" }
+                  - { label: "Lato", value: "Lato" }
+              - name: signature
+                label: Signature
+                widget: select
+                hint: Le nom en écriture manuscrite, en haut de chaque page
+                options:
+                  - { label: "Allura (actuelle)", value: "Allura" }
+                  - { label: "Great Vibes", value: "Great Vibes" }
+                  - { label: "Parisienne", value: "Parisienne" }
+                  - { label: "Pinyon Script", value: "Pinyon Script" }
+                  - { label: "Alex Brush", value: "Alex Brush" }
+                  - { label: "Mrs Saint Delafield", value: "Mrs Saint Delafield" }
+                  - { label: "Herr Von Muellerhoff", value: "Herr Von Muellerhoff" }
+                  - { label: "Monsieur La Doulaise", value: "Monsieur La Doulaise" }
+                  - { label: "Italianno", value: "Italianno" }
+          - name: couleurs
+            label: Couleurs
+            widget: object
+            fields:
+              - { name: fond, label: Fond, widget: color, allowInput: true }
+              - { name: fond_secondaire, label: "Fond secondaire (boutons, traits de séparation)", widget: color, allowInput: true }
+              - { name: titres, label: Titres et liens, widget: color, allowInput: true }
+              - { name: texte, label: Texte, widget: color, allowInput: true }
+              - { name: texte_discret, label: "Texte discret (années, légendes)", widget: color, allowInput: true }
+              - { name: accent, label: "Accent (survol des liens et des boutons)", widget: color, allowInput: true }
+          - name: accroche
+            label: Grand titre de l'accueil
+            widget: object
+            fields:
+              - { name: taille, label: "Taille (en %)", widget: number, value_type: int, min: 60, max: 150, step: 5, hint: "100 = taille d'origine" }
+              - { name: majuscules, label: En majuscules, widget: boolean }
+              - name: espacement
+                label: Espacement des lettres
+                widget: select
+                options:
+                  - { label: Serré, value: serre }
+                  - { label: Normal, value: normal }
+                  - { label: Large (actuel), value: large }
+          - { name: taille_texte, label: "Taille du texte (en %)", widget: number, value_type: int, min: 85, max: 125, step: 5, hint: "Agrandit ou réduit tout le site. 100 = taille d'origine" }

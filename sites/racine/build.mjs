@@ -3,9 +3,18 @@
 import { writeFileSync, cpSync } from "node:fs";
 import { join } from "node:path";
 import { esc, lireJson, ecrivain, sitemap } from "../../commun/outils.mjs";
+import { lireApparence, urlPolices, famillesChoisies } from "../../commun/theme.mjs";
 
 const ROOT = new URL(".", import.meta.url).pathname;
 const site = lireJson(join(ROOT, "content/site.json"));
+// le panneau de Maitane suit les polices et l'accent choisis dans son admin
+const apparenceMaitane = lireApparence(join(ROOT, "../maitane/content/apparence.json"));
+const polices = urlPolices([
+  ["Chakra Petch", "wght@600"],
+  ["IBM Plex Mono", "wght@400"],
+  ["Cormorant Garamond", "wght@400"],
+  ...famillesChoisies(apparenceMaitane.polices),
+]);
 
 function page({ titre, chemin, contenu }) {
   const full = titre ? `${titre} — ${site.nom}` : site.nom;
@@ -25,8 +34,9 @@ function page({ titre, chemin, contenu }) {
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Allura&family=Chakra+Petch:wght@600&family=Cormorant+Garamond:wght@400&family=IBM+Plex+Mono:wght@400&family=Nunito+Sans:wght@600&display=swap" rel="stylesheet">
+<link href="${esc(polices)}" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css">
+<link rel="stylesheet" href="/assets/theme.css">
 </head>
 <body>
 ${contenu}
@@ -81,6 +91,9 @@ export default function construire(DIST) {
   ecrire("index.html", accueil());
   ecrire("404.html", introuvable());
   cpSync(join(ROOT, "assets"), join(DIST, "assets"), { recursive: true });
+  const { polices: p, couleurs: c } = apparenceMaitane;
+  writeFileSync(join(DIST, "assets/theme.css"),
+    `/* Généré à partir de sites/maitane/content/apparence.json */\n:root {\n  --maitane-accent: ${c.accent};\n  --maitane-titre: "${p.titres}", Georgia, serif;\n  --maitane-texte: "${p.texte}", sans-serif;\n  --maitane-signature: "${p.signature}", cursive;\n}\n`);
   cpSync(join(ROOT, "public"), DIST, { recursive: true });
   writeFileSync(join(DIST, "sitemap.xml"), sitemap(site.url, ["/"]));
   return { pages: 2, avertissements: [] };

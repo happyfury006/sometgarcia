@@ -3,9 +3,12 @@
 import { readdirSync, writeFileSync, cpSync } from "node:fs";
 import { join } from "node:path";
 import { esc, lireJson, ecrivain, sitemap, dimensions, masquer } from "../../commun/outils.mjs";
+import { lireApparence, urlPolices, famillesChoisies, estClaire } from "../../commun/theme.mjs";
 
 const ROOT = new URL(".", import.meta.url).pathname;
 const site = lireJson(join(ROOT, "content/site.json"));
+// polices et couleurs choisies dans l'admin (section « Apparence »)
+const apparence = lireApparence(join(ROOT, "content/apparence.json"));
 
 // Collections triées de la plus récente à la plus ancienne
 const collections = readdirSync(join(ROOT, "content/collections"))
@@ -70,12 +73,13 @@ function page({ titre, description, chemin, contenu, corpsClasse = "" }) {
 <meta property="og:type" content="website">
 <meta property="og:url" content="${site.url}${chemin}">
 <meta property="og:image" content="${site.url}${esc(collections[0]?.couverture || site.apropos.photo)}">
-<meta name="theme-color" content="#000000">
+<meta name="theme-color" content="${esc(apparence.couleurs.fond)}">
 <link rel="icon" href="${esc(site.logo)}" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,700;1,400&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="${esc(urlPolices(famillesChoisies(apparence.polices)))}" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css">
+<link rel="stylesheet" href="/assets/theme.css">
 </head>
 <body class="${corpsClasse}">
 <a class="sauter" href="#contenu">Skip to content</a>
@@ -174,6 +178,35 @@ function introuvable() {
   return page({ titre: "Page not found", chemin: "/404.html", contenu });
 }
 
+// ---------- thème ----------
+// Variables CSS de assets/style.css remplacées par les choix de l'admin
+const ESPACEMENTS = { serre: "0.02em", normal: "0.1em", large: "clamp(0.15rem, 1.1vw, 1rem)" };
+
+function themeCss() {
+  const { polices: p, couleurs: c, accroche: a } = apparence;
+  return `/* Généré à partir de content/apparence.json : modifiable dans l'admin, section « Apparence » */
+:root {
+  --fond: ${c.fond};
+  --fond-clair: ${c.fond_secondaire};
+  --trait: ${c.fond_secondaire};
+  --texte: ${c.titres};
+  --texte-doux: ${c.texte};
+  --texte-leger: ${c.texte_discret};
+  --accent: ${c.accent};
+  --titre: "${p.titres}", Georgia, serif;
+  --corps: "${p.texte}", system-ui, sans-serif;
+  --signature: "${p.signature}", cursive;
+  color-scheme: ${estClaire(c.fond) ? "light" : "dark"};
+}
+html { font-size: ${Number(apparence.taille_texte) || 100}%; }
+.accroche h1 {
+  font-size: calc(clamp(2.1rem, 5vw, 4.5rem) * ${(Number(a.taille) || 100) / 100});
+  text-transform: ${a.majuscules ? "uppercase" : "none"};
+  letter-spacing: ${ESPACEMENTS[a.espacement] || ESPACEMENTS.large};
+}
+`;
+}
+
 // ---------- écriture ----------
 export default function construire(DIST) {
   const ecrire = ecrivain(DIST);
@@ -182,6 +215,7 @@ export default function construire(DIST) {
   collections.forEach((c, i) => ecrire(`collections/${c.slug}/index.html`, ficheCollection(c, i)));
   ecrire("404.html", introuvable());
   cpSync(join(ROOT, "assets"), join(DIST, "assets"), { recursive: true });
+  writeFileSync(join(DIST, "assets/theme.css"), themeCss());
   cpSync(join(ROOT, "public"), DIST, { recursive: true });
 
   const chemins = ["/", ...collections.map((c) => `/collections/${c.slug}/`)];
