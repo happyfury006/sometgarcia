@@ -19,6 +19,7 @@ publier() {  # dossier du jeu dans projet-zz1, nom dans l'adresse
   cp -R "$SOURCE/$1/build-web/." "$cible/"
   # WebAssembly a besoin de 'wasm-unsafe-eval' : autorisé seulement dans ces dossiers
   cp commun/jeux.htaccess "$cible/.htaccess"
+  chmod -R u=rwX,go=rX "$cible"  # lisible par le serveur web, quels que soient les droits d'origine
   echo "✓ $2 : $(du -sh "$cible" | cut -f1) dans $cible"
 }
 

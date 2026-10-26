@@ -41,4 +41,7 @@ define('DB_MOT_DE_PASSE', $(php_chaine "${DEMO_DB_MOT_DE_PASSE:-}"));
 define('DB_BASE', $(php_chaine "$DEMO_DB_BASE"));
 define('DB_PORT', ${DEMO_DB_PORT:-3306});
 PHP
+# Droits lisibles par le serveur web : le dossier temporaire du clone (mktemp -d,
+# droits 700) transmettait ses droits au dossier publié, et Apache répondait 403
+chmod -R u=rwX,go=rX "$CIBLE"
 echo "✓ boutique PHP publiée dans $CIBLE"
