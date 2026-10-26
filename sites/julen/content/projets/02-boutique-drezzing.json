@@ -5,9 +5,17 @@
   "resume": "Site e-commerce de l'association que j'ai cofondée, pour vendre tissus et objets aux étudiants de l'ISIMA.",
   "date": "2024-08",
   "vedette": true,
-  "stack": ["SvelteKit", "TypeScript", "Tailwind CSS", "Medusa"],
+  "stack": [
+    "SvelteKit",
+    "TypeScript",
+    "Tailwind CSS",
+    "Medusa"
+  ],
   "role": "Contributeur front-end, équipe de 2 · cofondateur de l'association",
-  "liens": { "demo": "https://drezzing.fr", "depot": "https://github.com/Drezzing/storefront" },
+  "liens": {
+    "demo": "https://drezzing.fr",
+    "depot": "https://github.com/Drezzing/storefront"
+  },
   "contexte": "Drezzing vend des tissus et des objets aux couleurs de l'ISIMA et de ses promotions. Il fallait une boutique en ligne que l'association puisse gérer seule : un front SvelteKit branché sur Medusa, une solution e-commerce open source qui gère le catalogue, le panier et les paiements.",
   "contributions": [
     "Pages des collections et des catégories, dont la page détaillée d'une collection avec pagination et filtres",
@@ -15,6 +23,6 @@
     "Gestion commune des miniatures produits sur l'accueil, les collections et les catégories",
     "Pages À propos, mentions légales, conditions générales de vente et politique de confidentialité"
   ],
-  "difficulte": "[À REMPLACER] Le problème le plus dur que tu as rencontré et comment tu l'as résolu.",
+  "difficulte": "Nous sommes partis de zéro, sans maquette ni modèle à suivre : les idées arrivaient au fil du développement, et il fallait vérifier en temps réel si elles fonctionnaient une fois à l'écran. Nous avons changé d'architecture à plusieurs reprises, à mesure que nous avions une vision d'ensemble du site : c'est ce qui nous a menés, par exemple, à regrouper les panneaux latéraux dans un composant commun et à partager la gestion des miniatures entre les pages.",
   "image": ""
 }

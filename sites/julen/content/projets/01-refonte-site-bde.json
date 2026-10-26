@@ -5,7 +5,15 @@
   "resume": "Application web pour gérer les comptes, les organisations, les événements et les transactions du BDE. Projet en cours, première version bientôt en ligne.",
   "date": "2026-10",
   "vedette": true,
-  "stack": ["Django", "Django REST Framework", "React", "TypeScript", "PostgreSQL", "Docker", "GitLab CI"],
+  "stack": [
+    "Django",
+    "Django REST Framework",
+    "React",
+    "TypeScript",
+    "PostgreSQL",
+    "Docker",
+    "GitLab CI"
+  ],
   "role": "Développeur fullstack, équipe de 3 (en cours)",
   "liens": {},
   "contexte": "Le BDE de l'ISIMA gère des adhérents, des pôles et des clubs, des événements et des transactions. La refonte remplace l'ancien site par une API Django et une interface React, adossées à PostgreSQL, avec un système de permissions qui permet à chaque organisation de se gérer elle-même.",
@@ -16,6 +24,6 @@
     "Sessions : cookies persistants et déconnexion automatique quand le jeton de rafraîchissement expire",
     "Déploiement continu (GitLab CI) : la base de test n'est plus effacée à chaque déploiement"
   ],
-  "difficulte": "[À REMPLACER] Le problème le plus dur que tu as rencontré et comment tu l'as résolu. Par exemple : passer de rôles globaux à des permissions liées au poste sans casser les comptes existants.",
+  "difficulte": "Le site devait répondre à un besoin qui grandit chaque année : automatiser les tâches régulières des membres du BDE. Il fallait à la fois reconstruire ce que l'ancien site faisait déjà, la boutique, la gestion des produits et celle des utilisateurs, aller plus loin sur ces fonctionnalités, et concevoir les nouveaux modules : trésorerie, emploi du temps, événements et communication. Tout cela sans casser les usages existants pendant la transition.",
   "image": ""
 }

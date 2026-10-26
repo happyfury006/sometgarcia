@@ -4,17 +4,43 @@
   "titre": "Prédiction du risque d'AVC",
   "resume": "Modèle de classification qui repère les patients à risque d'accident vasculaire cérébral sur un jeu de données médical très déséquilibré, puis retour critique sur notre première version.",
   "date": "2025-01",
-  "vedette": false,
-  "stack": ["Python", "pandas", "scikit-learn", "imbalanced-learn", "XGBoost", "Jupyter"],
+  "vedette": true,
+  "stack": [
+    "Python",
+    "pandas",
+    "scikit-learn",
+    "imbalanced-learn",
+    "XGBoost",
+    "Jupyter"
+  ],
   "role": "Projet de fouille de données à l'ISIMA, en binôme avec Jocelin Calas",
   "liens": {},
   "question": "Peut-on prédire, à partir de quelques informations médicales simples (âge, hypertension, glucose, IMC, tabac…), si un patient risque de faire un AVC ? L'enjeu est de rater le moins de cas possible.",
   "donnees": "5 110 patients et 10 variables, dont seulement 249 ont fait un AVC (moins de 5 %). Des valeurs d'IMC sont manquantes.",
   "methode": "Exploration des données, puis imputation, encodage et normalisation regroupés dans une pipeline scikit-learn. Le déséquilibre est géré par pondération des classes ou par SMOTE appliqué uniquement aux plis d'entraînement. Nous avons comparé la régression logistique, Random Forest et XGBoost par validation croisée sur l'AUC ROC. Le seuil de décision est choisi sur le jeu d'entraînement pour détecter au moins 80 % des AVC.",
+  "graphiques": [
+    {
+      "src": "/images/prediction-avc-exploration.png",
+      "legende": "Moins de 5 % des patients ont fait un AVC, et ce taux passe de presque zéro avant 40 ans à plus de 20 % après 80 ans."
+    },
+    {
+      "src": "/images/prediction-avc-variables.png",
+      "legende": "Importance de chaque variable pour le modèle corrigé : sans l'âge, l'AUC chute de 0,29 ; les autres variables n'apportent presque rien."
+    }
+  ],
   "resultats": [
-    { "valeur": "79 %", "libelle": "des AVC détectés sur le jeu de test (contre 19 % pour notre première version)" },
-    { "valeur": "0,84", "libelle": "d'AUC ROC (contre 0,79)" },
-    { "valeur": "1 sur 7", "libelle": "patients signalés qui font réellement un AVC" }
+    {
+      "valeur": "79 %",
+      "libelle": "des AVC détectés sur le jeu de test (contre 19 % pour notre première version)"
+    },
+    {
+      "valeur": "0,84",
+      "libelle": "d'AUC ROC (contre 0,79)"
+    },
+    {
+      "valeur": "1 sur 7",
+      "libelle": "patients signalés qui font réellement un AVC"
+    }
   ],
   "conclusion": "Notre première version affichait 95 % d'accuracy tout en ratant quatre AVC sur cinq, et contenait une fuite de la cible dans l'imputation de l'IMC. En la corrigeant et en choisissant une métrique adaptée, le modèle devient utilisable comme premier tri. Il génère cependant beaucoup de fausses alertes et repose presque uniquement sur l'âge : la limite vient des variables disponibles, pas de l'algorithme.",
   "image": "/images/prediction-avc.png"
