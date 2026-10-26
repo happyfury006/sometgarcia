@@ -68,6 +68,7 @@ function page({ titre, description, chemin, contenu, corpsClasse = "" }) {
   <nav aria-label="Navigation principale">
     ${nav("/", "Accueil")}
     ${nav("/projets/", "Missions")}
+    <a href="/associatif/">Associatif</a>
     <a href="/#contact">Contact</a>
   </nav>
 </header>

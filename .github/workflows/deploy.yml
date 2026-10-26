@@ -35,6 +35,10 @@ jobs:
       - name: Compiler les jeux en WebAssembly
         run: bash scripts/jeux-web.sh
 
+      # Site associatif (dossier associatif/ de github.com/happyfury006/site)
+      - name: Publier le site associatif
+        run: bash scripts/associatif.sh
+
       # Démo de la boutique PHP (github.com/happyfury006/projetwebzz2), sur la base
       # MySQL d'OVH ; ignorée tant que le secret DEMO_DB_BASE n'est pas renseigné
       - name: Publier la boutique PHP
