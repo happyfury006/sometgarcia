@@ -1,6 +1,13 @@
 // Utilitaires partagés par les générateurs de sites/.
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
+import { createHash } from "node:crypto";
+
+// Empreinte courte d'un contenu, ajoutée à l'adresse des CSS et JS (style.css?v=3f2a9c1e) :
+// elle change dès que le fichier change, donc les navigateurs ne gardent pas une
+// ancienne version en cache (le serveur leur demande de garder ces fichiers 7 jours)
+export const empreinte = (contenu) => createHash("sha256").update(contenu).digest("hex").slice(0, 8);
+export const empreinteFichier = (fichier) => empreinte(readFileSync(fichier));
 
 export const esc = (s = "") =>
   String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);

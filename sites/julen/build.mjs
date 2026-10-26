@@ -2,6 +2,7 @@
 // Appelé par le build.mjs de la racine du dépôt.
 import { readFileSync, writeFileSync, readdirSync, mkdirSync, cpSync } from "node:fs";
 import { join } from "node:path";
+import { empreinteFichier } from "../../commun/outils.mjs";
 
 const ROOT = new URL(".", import.meta.url).pathname;
 const site = JSON.parse(readFileSync(join(ROOT, "content/site.json"), "utf8"));
@@ -57,7 +58,7 @@ function page({ titre, description, chemin, contenu, corpsClasse = "" }) {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css">
+<link rel="stylesheet" href="/assets/style.css?v=${empreinteFichier(join(ROOT, "assets/style.css"))}">
 </head>
 <body class="${corpsClasse}">
 <canvas id="etoiles" aria-hidden="true"></canvas>
@@ -77,7 +78,7 @@ ${contenu}
   <span class="mono">${esc(site.indicatif)} · transmission terminée</span>
   <span>© ${new Date().getFullYear()} ${esc(site.nom)} · <a href="https://sometgarcia.fr">sometgarcia.fr</a></span>
 </footer>
-<script src="/assets/main.js" defer></script>
+<script src="/assets/main.js?v=${empreinteFichier(join(ROOT, "assets/main.js"))}" defer></script>
 </body>
 </html>`;
 }

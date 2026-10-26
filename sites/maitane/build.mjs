@@ -2,7 +2,7 @@
 // Le site est en anglais, comme l'ancien WordPress. Appelé par le build.mjs de la racine du dépôt.
 import { readdirSync, writeFileSync, cpSync } from "node:fs";
 import { join } from "node:path";
-import { esc, lireJson, ecrivain, sitemap, dimensions, masquer } from "../../commun/outils.mjs";
+import { esc, lireJson, ecrivain, sitemap, dimensions, masquer, empreinte, empreinteFichier } from "../../commun/outils.mjs";
 import { lireApparence, urlPolices, famillesChoisies, estClaire } from "../../commun/theme.mjs";
 
 const ROOT = new URL(".", import.meta.url).pathname;
@@ -78,8 +78,8 @@ function page({ titre, description, chemin, contenu, corpsClasse = "" }) {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="${esc(urlPolices(famillesChoisies(apparence.polices)))}" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css">
-<link rel="stylesheet" href="/assets/theme.css">
+<link rel="stylesheet" href="/assets/style.css?v=${empreinteFichier(join(ROOT, "assets/style.css"))}">
+<link rel="stylesheet" href="/assets/theme.css?v=${empreinte(themeCss())}">
 </head>
 <body class="${corpsClasse}">
 <a class="sauter" href="#contenu">Skip to content</a>
@@ -118,7 +118,7 @@ ${contenu}
     <a href="https://sometgarcia.fr">sometgarcia.fr</a>
   </div>
 </footer>
-<script src="/assets/main.js" defer></script>
+<script src="/assets/main.js?v=${empreinteFichier(join(ROOT, "assets/main.js"))}" defer></script>
 </body>
 </html>`;
 }

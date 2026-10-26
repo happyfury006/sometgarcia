@@ -2,7 +2,7 @@
 // Appelé par le build.mjs de la racine du dépôt.
 import { writeFileSync, cpSync } from "node:fs";
 import { join } from "node:path";
-import { esc, lireJson, ecrivain, sitemap } from "../../commun/outils.mjs";
+import { esc, lireJson, ecrivain, sitemap, empreinte, empreinteFichier } from "../../commun/outils.mjs";
 import { lireApparence, urlPolices, famillesChoisies } from "../../commun/theme.mjs";
 
 const ROOT = new URL(".", import.meta.url).pathname;
@@ -35,8 +35,8 @@ function page({ titre, chemin, contenu }) {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="${esc(polices)}" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css">
-<link rel="stylesheet" href="/assets/theme.css">
+<link rel="stylesheet" href="/assets/style.css?v=${empreinteFichier(join(ROOT, "assets/style.css"))}">
+<link rel="stylesheet" href="/assets/theme.css?v=${empreinte(themeCss())}">
 </head>
 <body>
 ${contenu}
@@ -86,14 +86,18 @@ function introuvable() {
   });
 }
 
+// Polices et accent de Maitane, pour son panneau
+function themeCss() {
+  const { polices: p, couleurs: c } = apparenceMaitane;
+  return `/* Généré à partir de sites/maitane/content/apparence.json */\n:root {\n  --maitane-accent: ${c.accent};\n  --maitane-titre: "${p.titres}", Georgia, serif;\n  --maitane-texte: "${p.texte}", sans-serif;\n  --maitane-signature: "${p.signature}", cursive;\n}\n`;
+}
+
 export default function construire(DIST) {
   const ecrire = ecrivain(DIST);
   ecrire("index.html", accueil());
   ecrire("404.html", introuvable());
   cpSync(join(ROOT, "assets"), join(DIST, "assets"), { recursive: true });
-  const { polices: p, couleurs: c } = apparenceMaitane;
-  writeFileSync(join(DIST, "assets/theme.css"),
-    `/* Généré à partir de sites/maitane/content/apparence.json */\n:root {\n  --maitane-accent: ${c.accent};\n  --maitane-titre: "${p.titres}", Georgia, serif;\n  --maitane-texte: "${p.texte}", sans-serif;\n  --maitane-signature: "${p.signature}", cursive;\n}\n`);
+  writeFileSync(join(DIST, "assets/theme.css"), themeCss());
   cpSync(join(ROOT, "public"), DIST, { recursive: true });
   writeFileSync(join(DIST, "sitemap.xml"), sitemap(site.url, ["/"]));
   return { pages: 2, avertissements: [] };
