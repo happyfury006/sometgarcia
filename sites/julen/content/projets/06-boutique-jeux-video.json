@@ -5,9 +5,17 @@
   "resume": "Catalogue de jeux vidéo par catégorie avec panier, en PHP et MariaDB : mon premier site adossé à une base de données.",
   "date": "2024-12",
   "vedette": true,
-  "stack": ["PHP", "MariaDB", "SQL", "HTML / CSS"],
+  "stack": [
+    "PHP",
+    "MariaDB",
+    "SQL",
+    "HTML / CSS"
+  ],
   "role": "Projet de développement web à l'ISIMA (2e année), en binôme avec Jocelin Calas",
-  "liens": { "depot": "https://github.com/happyfury006/projetwebzz2" },
+  "liens": {
+    "demo": "/demos/boutique-jeux-video/",
+    "depot": "https://github.com/happyfury006/projetwebzz2"
+  },
   "contexte": "À partir d'une base MariaDB fournie (articles, catégories, TVA, paniers), il fallait construire une boutique en ligne en PHP sans framework : afficher les catégories, lister les jeux de chaque catégorie et gérer un panier.",
   "contributions": [
     "Mise en page du site et feuille de style : en-tête, formulaires de connexion et d'inscription, cartes produits",
