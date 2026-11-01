@@ -140,7 +140,6 @@ function accueil() {
     <p class="intro-accroche">${esc(site.accroche)}</p>
     <div class="actions">
       <a class="btn" href="/projets/">Voir les missions</a>
-      <a class="btn btn-ghost" href="${esc(site.contact.cv)}">Télécharger le CV</a>
     </div>
   </div>
   <div class="hud" aria-hidden="true">
