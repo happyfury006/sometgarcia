@@ -2,22 +2,126 @@
   "url": "https://julen.sometgarcia.fr",
   "nom": "Julen Somet García",
   "indicatif": "JSG-27",
-  "titre": "Élève ingénieur en informatique — Systèmes d'information et aide à la décision",
-  "accroche": "Je conçois des bases de données, des traitements de données et des services web, de la donnée brute jusqu'à l'interface qui l'exploite.",
+  "titre": "Élève ingénieur en informatique — Data, développement web et logiciel",
+  "accroche": "Je conçois des bases de données, des API et des applications : de la donnée brute jusqu'à l'interface qui l'exploite, en passant par le code qui la fait vivre.",
   "statut": "En recherche de stage de fin d'études — 5 à 6 mois à partir d'avril 2027",
   "presentation": [
     "Élève ingénieur en dernière année à l'ISIMA (Clermont Auvergne INP), filière Systèmes d'information et aide à la décision : analyse de données, bases de données, informatique décisionnelle et développement web. J'ai passé un semestre d'échange à l'Université de l'Ouest de Timișoara, en Roumanie, de février à juin 2025.",
-    "Je cherche un stage en data engineering ou en data science, ou en développement web dès qu'il y a une vraie base de données derrière. Ce qui m'intéresse : les services web, les entrepôts et lacs de données, et tout ce qui fait circuler la donnée proprement d'un système à l'autre.",
+    "Je cherche un stage en data engineering ou en data science, en développement web et services web (API, back-end ou fullstack), ou en développement logiciel. Ce qui m'intéresse : concevoir des services web solides, faire circuler la donnée proprement d'un système à l'autre, et écrire du code testé que d'autres pourront reprendre.",
     "À côté des cours, je suis engagé dans la vie associative de l'école : membre du conseil d'administration et responsable logistique du BDE (2024–2025), trésorier d'un week-end d'accueil au budget de 20 000 € (environ 170 participants, record depuis cinq ans, clôturé avec près de 4 000 € d'excédent), et cofondateur et secrétaire de l'association Drezzing (2024–2025)."
   ],
-  "competences": [
-    { "groupe": "Données", "items": ["Python", "pandas", "SQL"] },
-    { "groupe": "Bases de données", "items": ["PostgreSQL", "Oracle", "MySQL", "MariaDB", "Cassandra", "MongoDB"] },
-    { "groupe": "Langages", "items": ["Java", "C", "C++"] },
-    { "groupe": "Web", "items": ["JavaScript", "TypeScript", "React", "Svelte", "Django", "Node.js", "HTML / CSS"] },
-    { "groupe": "Outils", "items": ["Git", "Docker", "Linux", "CI/CD"] }
+  "domaines": [
+    {
+      "type": "data",
+      "titre": "Data",
+      "sous": "Analyse, modélisation et évaluation",
+      "texte": "Préparer des données réelles, construire des modèles et surtout les évaluer honnêtement, face à des références simples.",
+      "points": [
+        "Pipelines pandas et scikit-learn, du nettoyage à l'évaluation",
+        "Séries temporelles, données déséquilibrées, validation croisée",
+        "Fuites de données repérées et corrigées dans mes premières versions"
+      ],
+      "projets": [
+        "data-mining-consommation-electrique",
+        "prediction-avc"
+      ]
+    },
+    {
+      "type": "web",
+      "titre": "Web et services web",
+      "sous": "API, back-end et interfaces",
+      "texte": "Concevoir des API REST adossées à une vraie base de données, et les interfaces qui les exploitent.",
+      "points": [
+        "API Django REST Framework sur PostgreSQL, permissions par poste",
+        "Comptes sécurisés : jetons hashés, limitation de requêtes, sessions",
+        "Interfaces React, TypeScript et SvelteKit, déploiement continu GitLab CI"
+      ],
+      "projets": [
+        "refonte-site-bde",
+        "boutique-drezzing",
+        "boutique-jeux-video"
+      ]
+    },
+    {
+      "type": "logiciel",
+      "titre": "Développement logiciel",
+      "sous": "Conception, algorithmes et tests",
+      "texte": "Structurer un programme pour qu'il reste lisible et testable, et reprendre un code existant jusqu'à le rendre fiable.",
+      "points": [
+        "Conception objet en Java : quatre design patterns, 24 tests JUnit",
+        "C et SDL2 : interfaces graphiques, gestion de la mémoire",
+        "IA de jeu : minimax alpha-bêta et Monte-Carlo (MCTS), validées par des centaines de parties simulées"
+      ],
+      "projets": [
+        "simulation-star-wars",
+        "quantik",
+        "catane-jeu-de-cartes"
+      ]
+    }
   ],
-  "langues": ["Français (bilingue)", "Espagnol (bilingue)", "Anglais B2 (TOEIC 935)"],
+  "competences": [
+    {
+      "groupe": "Data",
+      "items": [
+        "Python",
+        "pandas",
+        "scikit-learn",
+        "SQL",
+        "Power BI"
+      ]
+    },
+    {
+      "groupe": "Bases de données",
+      "items": [
+        "PostgreSQL",
+        "Oracle",
+        "MySQL",
+        "MariaDB",
+        "Cassandra",
+        "MongoDB"
+      ]
+    },
+    {
+      "groupe": "Web et services web",
+      "items": [
+        "Django REST Framework",
+        "API REST",
+        "React",
+        "TypeScript",
+        "Svelte",
+        "Node.js",
+        "PHP",
+        "HTML / CSS"
+      ]
+    },
+    {
+      "groupe": "Logiciel",
+      "items": [
+        "Java",
+        "C",
+        "C++",
+        "Conception objet",
+        "Design patterns",
+        "JUnit",
+        "SDL2"
+      ]
+    },
+    {
+      "groupe": "Outils",
+      "items": [
+        "Git",
+        "Docker",
+        "Linux",
+        "CI/CD",
+        "Maven"
+      ]
+    }
+  ],
+  "langues": [
+    "Français (bilingue)",
+    "Espagnol (bilingue)",
+    "Anglais B2 (TOEIC 935)"
+  ],
   "contact": {
     "email": "julen.sometgarcia@gmail.com",
     "github": "https://github.com/happyfury006",

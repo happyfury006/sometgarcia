@@ -53,6 +53,9 @@
         c.hidden = f !== "tout" && !c.classList.contains(`carte-${f}`);
       });
     }));
+    // Lien venu de l'accueil (/projets/?type=web) : le filtre correspondant est déjà actif
+    const demande = new URLSearchParams(location.search).get("type");
+    document.querySelector(`.filtre[data-filtre="${CSS.escape(demande || "")}"]`)?.click();
   }
 
   // ----- Apparitions -----

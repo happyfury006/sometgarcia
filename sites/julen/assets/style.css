@@ -114,6 +114,26 @@ main { flex: 1; }
 .competences dd { margin: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .competences dd span { padding: 0.3rem 0.7rem; border: 1px solid var(--ligne); border-radius: var(--rayon); background: var(--surface); font-size: 0.9rem; }
 
+.domaines { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); gap: 1.25rem; margin-top: 1.5rem; }
+.domaine {
+  --teinte: var(--cyan);
+  display: flex; flex-direction: column; padding: 1.5rem;
+  border: 1px solid var(--ligne); border-top: 2px solid var(--teinte); border-radius: var(--rayon);
+  background: var(--surface); backdrop-filter: blur(6px);
+}
+.domaine-web { --teinte: var(--ambre); }
+.domaine-logiciel { --teinte: var(--violet); }
+.domaine h3 { font-size: 1.35rem; margin-bottom: 0.6rem; color: var(--teinte); }
+.domaine > p { color: var(--texte-doux); }
+.domaine-sous { font-size: 0.72rem; color: var(--texte-doux) !important; margin-bottom: 0.4rem; }
+.domaine-points { margin: 0 0 1rem; padding-left: 1.1rem; font-size: 0.93rem; }
+.domaine-points li { margin-bottom: 0.4rem; }
+.domaine-points li::marker { color: var(--teinte); content: "▸  "; }
+.domaine-preuves { font-size: 0.72rem; color: var(--teinte) !important; margin: auto 0 0.4rem; }
+.domaine-projets { margin: 0 0 1rem; padding: 0; list-style: none; font-size: 0.93rem; }
+.domaine-projets li { padding: 0.3rem 0; border-top: 1px solid var(--ligne); }
+.domaine .lien-fleche { color: var(--teinte); }
+
 .contact { border-top: 1px solid var(--ligne); }
 .contact p { color: var(--texte-doux); }
 

@@ -110,6 +110,24 @@ function section(titre, corps, etiquette) {
 </section>`;
 }
 
+// Domaine de compétence de l'accueil : ce que je sais faire, et les projets qui le montrent
+function domaine(d) {
+  const lies = d.projets.map((slug) => {
+    const p = projets.find((x) => x.slug === slug);
+    if (!p) throw new Error(`Domaine ${d.titre} : projet introuvable ${slug}`);
+    return `<li><a href="/projets/${esc(p.slug)}/">${esc(p.titre)}</a></li>`;
+  }).join("");
+  return `<article class="domaine domaine-${d.type}">
+    <p class="mono domaine-sous">${esc(d.sous)}</p>
+    <h3>${esc(d.titre)}</h3>
+    <p>${esc(d.texte)}</p>
+    <ul class="domaine-points">${d.points.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
+    <p class="mono domaine-preuves">Projets</p>
+    <ul class="domaine-projets">${lies}</ul>
+    <a class="lien-fleche" href="/projets/?type=${d.type}">Missions ${esc(TYPES[d.type].libelle)} →</a>
+  </article>`;
+}
+
 // ---------- pages ----------
 function accueil() {
   const vedettes = projets.filter((p) => p.vedette);
@@ -131,9 +149,14 @@ function accueil() {
   </div>
 </section>
 
+<section class="bloc" aria-labelledby="t-domaines">
+  <h2 id="t-domaines"><span class="mono bloc-etiquette">01 / Domaines</span>Ce que je sais faire</h2>
+  <div class="domaines">${site.domaines.map(domaine).join("")}</div>
+</section>
+
 <section class="bloc" aria-labelledby="t-missions">
   <div class="bloc-entete">
-    <h2 id="t-missions"><span class="mono bloc-etiquette">01 / Missions</span>Projets choisis</h2>
+    <h2 id="t-missions"><span class="mono bloc-etiquette">02 / Missions</span>Projets choisis</h2>
     <a class="lien-fleche" href="/projets/">Toutes les missions →</a>
   </div>
   <div class="grille">${vedettes.map((p) => carte(p, projets.indexOf(p))).join("")}</div>
@@ -141,7 +164,7 @@ function accueil() {
 
 <section class="bloc deux-colonnes" aria-labelledby="t-profil">
   <div>
-    <h2 id="t-profil"><span class="mono bloc-etiquette">02 / Profil</span>Qui pilote</h2>
+    <h2 id="t-profil"><span class="mono bloc-etiquette">03 / Profil</span>Qui pilote</h2>
     ${site.presentation.map((t) => `<p>${esc(t)}</p>`).join("")}
     <p class="mono langues">Langues · ${site.langues.map(esc).join(" · ")}</p>
   </div>
@@ -151,7 +174,7 @@ function accueil() {
 </section>
 
 <section class="bloc contact" id="contact" aria-labelledby="t-contact">
-  <h2 id="t-contact"><span class="mono bloc-etiquette">03 / Canal ouvert</span>Me contacter</h2>
+  <h2 id="t-contact"><span class="mono bloc-etiquette">04 / Canal ouvert</span>Me contacter</h2>
   <p>Pour un stage, une question sur un projet ou simplement échanger.</p>
   <div class="actions">
     <a class="btn" href="mailto:${esc(site.contact.email)}">${esc(site.contact.email)}</a>
